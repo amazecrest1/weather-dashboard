@@ -70,6 +70,9 @@ const TemperatureChart: React.FC<TemperatureChartProps> = ({ data, className = '
                 borderRadius: '6px',
                 boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)'
               }}
+              cursor={{ stroke: '#D1D5DB', strokeWidth: 1, strokeDasharray: '3 3' }}
+              isAnimationActive={false}
+              animationDuration={0}
             />
             <Legend />
             <Line 

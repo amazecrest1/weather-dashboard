@@ -78,6 +78,9 @@ const DetailedChart: React.FC<DetailedChartProps> = ({ data, parameters }) => {
         <Tooltip
           contentStyle={{ backgroundColor: '#222', border: '1px solid #555' }}
           labelStyle={{ color: '#eee' }}
+          cursor={{ stroke: '#555', strokeWidth: 1, strokeDasharray: '3 3' }}
+          isAnimationActive={false}
+          animationDuration={0}
         />
         <Legend wrapperStyle={{ color: '#ccc', paddingTop: '20px' }} />
         <Line

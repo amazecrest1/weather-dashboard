@@ -8,6 +8,7 @@ import DateRangePicker from '../components/DateRangePicker';
 import ParameterSelector from '../components/ParameterSelector';
 import MultiParameterChart from '../components/MultiParameterChart';
 import LoadingSpinner from '../components/LoadingSpinner';
+import ThemeToggle from '../components/ThemeToggle';
 
 // Helper functions for insights
 const calculateCorrelation = (data1: number[], data2: number[]): number => {
@@ -67,7 +68,7 @@ const getTrendDirection = (data: number[]): string => {
   return 'Stable';
 };
 
-const DetailedInsights: React.FC = () => {
+const DetailedInsights = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const navigationState = location.state as {
@@ -112,9 +113,9 @@ const DetailedInsights: React.FC = () => {
   const chartData = weatherData ? transformHourlyData(weatherData, selectedParameters) : [];
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 transition-colors duration-200">
       {/* Top Bar */}
-      <div className="bg-gray-800 text-white py-3 px-6 shadow-sm">
+      <div className="bg-gray-800 dark:bg-gray-950 text-white py-3 px-6 shadow-sm">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
             <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -122,13 +123,16 @@ const DetailedInsights: React.FC = () => {
             </svg>
             <span className="font-bold">Weather</span>
           </div>
-          <div className="text-sm opacity-90">Detailed Insights</div>
+          <div className="flex items-center gap-4">
+            <div className="text-sm opacity-90">Detailed Insights</div>
+            <ThemeToggle />
+          </div>
         </div>
       </div>
       
       <div className="flex">
         {/* Left Vertical Sidebar */}
-        <div className="w-16 bg-white border-r border-gray-200 flex flex-col items-center py-4">
+        <div className="w-16 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex flex-col items-center py-4">
           <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ backgroundColor: '#E6F7FA' }}>
             <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect x="8" y="14" width="3" height="8" rx="1.5" stroke="#00A7C4" strokeWidth="2" fill="none" />
@@ -143,18 +147,18 @@ const DetailedInsights: React.FC = () => {
         <div className="flex-1 p-8">
           {/* Detailed Insights Header */}
           <div className="flex items-center justify-between mb-8">
-            <h1 className="text-2xl font-semibold text-gray-900">Detailed Insights</h1>
+            <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">Detailed Insights</h1>
             <button 
               onClick={() => navigate('/')}
-              className="text-gray-600 hover:text-gray-900 px-3 py-1 rounded transition-colors text-sm font-medium"
+              className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white px-3 py-1 rounded transition-colors text-sm font-medium"
             >
               ← Back to Overview
             </button>
           </div>
 
           {/* Filters */}
-          <div className="bg-white border border-gray-200 rounded-lg p-6 mb-8">
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">Filters</h2>
+          <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 mb-8">
+            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Filters</h2>
             <div className="flex items-center gap-6 mb-4">
               <div className="flex-1 max-w-xs">
                 <DateRangePicker
@@ -213,7 +217,7 @@ const DetailedInsights: React.FC = () => {
 
           {/* Chart */}
           {!loading && !error && (
-            <div className="bg-white border border-gray-200 rounded-lg p-6 mb-8">
+            <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 mb-8">
               <MultiParameterChart
                 data={chartData}
                 selectedParameters={selectedParameters}
@@ -222,9 +226,9 @@ const DetailedInsights: React.FC = () => {
           )}
 
           {/* Comparison Insights */}
-          {!loading && !error && selectedParameters.length === 2 && chartData.length > 0 && (
-            <div className="bg-white border border-gray-200 rounded-lg p-6 mb-8">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">Comparison Insights</h2>
+          {!loading && !error && selectedParameters.length >= 1 && chartData.length > 0 && (
+            <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 mb-8">
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Comparison Insights</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {(() => {
                   const param1 = selectedParameters[0];
@@ -245,31 +249,33 @@ const DetailedInsights: React.FC = () => {
                   
                   return (
                     <>
-                      <div className="bg-blue-50 p-4 rounded-lg">
-                        <h3 className="font-medium text-blue-900 mb-2">Correlation Analysis</h3>
-                        <div className="text-2xl font-bold text-blue-700">
+                      <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
+                        <h3 className="font-medium text-blue-900 dark:text-blue-300 mb-2">Correlation Analysis</h3>
+                        <div className="text-2xl font-bold text-blue-700 dark:text-blue-400">
                           {correlation > 0.7 ? 'Strong Positive' : 
                            correlation > 0.3 ? 'Moderate Positive' :
                            correlation > -0.3 ? 'Weak' :
                            correlation > -0.7 ? 'Moderate Negative' : 'Strong Negative'}
                         </div>
-                        <p className="text-sm text-blue-600 mt-1">
+                        <p className="text-sm text-blue-600 dark:text-blue-400 mt-1">
                           Correlation: {correlation.toFixed(2)}
                         </p>
                       </div>
                       
-                      <div className="bg-green-50 p-4 rounded-lg">
-                        <h3 className="font-medium text-green-900 mb-2">Average Values</h3>
-                        <div className="space-y-1">
-                          <div className="flex justify-between">
-                            <span className="text-sm text-green-700">{getParameterLabel(param1)}:</span>
-                            <span className="font-medium text-green-900">{param1Avg.toFixed(1)} {getParameterUnit(param1)}</span>
+                      <div className="bg-green-50 dark:bg-green-900/20 p-4 rounded-lg">
+                        <h3 className="font-medium text-green-900 dark:text-green-300 mb-2">Average Values</h3>
+                                                  <div className="space-y-1">
+                            <div className="flex justify-between">
+                              <span className="text-sm text-green-700 dark:text-green-400">{getParameterLabel(param1)}:</span>
+                              <span className="font-medium text-green-900 dark:text-green-300">{param1Avg.toFixed(1)} {getParameterUnit(param1)}</span>
+                            </div>
+                            {param2 && (
+                              <div className="flex justify-between">
+                                <span className="text-sm text-green-700 dark:text-green-400">{getParameterLabel(param2)}:</span>
+                                <span className="font-medium text-green-900 dark:text-green-300">{param2Avg.toFixed(1)} {getParameterUnit(param2)}</span>
+                              </div>
+                            )}
                           </div>
-                          <div className="flex justify-between">
-                            <span className="text-sm text-green-700">{getParameterLabel(param2)}:</span>
-                            <span className="font-medium text-green-900">{param2Avg.toFixed(1)} {getParameterUnit(param2)}</span>
-                          </div>
-                        </div>
                       </div>
                       
                       <div className="bg-purple-50 p-4 rounded-lg">
@@ -353,7 +359,7 @@ const DetailedInsights: React.FC = () => {
           {!loading && !error && !weatherData && (
             <div className="flex items-center justify-center h-96">
               <div className="text-center">
-                <p className="text-gray-500">No weather data available for the selected filters.</p>
+                <p className="text-gray-500 dark:text-gray-400">No weather data available for the selected filters.</p>
               </div>
             </div>
           )}

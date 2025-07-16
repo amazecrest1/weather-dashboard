@@ -61,4 +61,110 @@
 /* Ensure high z-index elements appear above everything */
 .z-\[9999\] {
   z-index: 9999 !important;
+}
+
+/* Fix persistent hover state in Recharts */
+.recharts-tooltip-wrapper {
+  pointer-events: none !important;
+}
+
+.recharts-tooltip-wrapper:hover {
+  pointer-events: auto !important;
+}
+
+.recharts-cursor {
+  display: none !important;
+}
+
+.recharts-tooltip-cursor {
+  display: none !important;
+}
+
+/* Additional fixes for persistent hover state */
+.recharts-tooltip {
+  pointer-events: none !important;
+}
+
+.recharts-tooltip:hover {
+  pointer-events: auto !important;
+}
+
+.recharts-default-tooltip {
+  pointer-events: none !important;
+}
+
+.recharts-default-tooltip:hover {
+  pointer-events: auto !important;
+}
+
+/* Hide cursor lines by default */
+.recharts-cursor-line {
+  display: none !important;
+}
+
+.recharts-cursor-line-horizontal {
+  display: none !important;
+}
+
+.recharts-cursor-line-vertical {
+  display: none !important;
+}
+
+/* Completely disable all Recharts cursor and tooltip elements */
+.recharts-tooltip-wrapper,
+.recharts-tooltip,
+.recharts-default-tooltip,
+.recharts-cursor,
+.recharts-tooltip-cursor,
+.recharts-cursor-line,
+.recharts-cursor-line-horizontal,
+.recharts-cursor-line-vertical,
+.recharts-tooltip-cursor-line {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* Ensure no hover effects on chart elements */
+.recharts-line-curve,
+.recharts-line-dot,
+.recharts-line-segment {
+  pointer-events: none !important;
+}
+
+/* Force remove any persistent hover states */
+.recharts-wrapper * {
+  transition: none !important;
+  animation: none !important;
+}
+
+/* Ensure chart container properly shows dark theme */
+.recharts-wrapper {
+  background-color: inherit !important;
+}
+
+.recharts-surface {
+  background-color: inherit !important;
+}
+
+/* Dark theme specific overrides */
+.dark .recharts-wrapper,
+.dark .recharts-surface {
+  background-color: #1F2937 !important;
+}
+
+/* Force dark background for chart containers in dark mode */
+.dark .card {
+  background-color: #1F2937 !important;
+  border-color: #374151 !important;
+}
+
+.dark .bg-gray-800 {
+  background-color: #1F2937 !important;
+}
+
+/* Ensure chart background is properly set */
+.dark [class*="bg-gray-800"] {
+  background-color: #1F2937 !important;
 } 

@@ -9,8 +9,9 @@ import TemperatureChart from '../components/TemperatureChart';
 import PrecipitationChart from '../components/PrecipitationChart';
 import WindSpeedChart from '../components/WindSpeedChart';
 import LoadingSpinner from '../components/LoadingSpinner';
+import ThemeToggle from '../components/ThemeToggle';
 
-const Overview: React.FC = () => {
+const Overview = () => {
   const navigate = useNavigate();
   const [selectedCity, setSelectedCity] = useState(DEFAULT_CITY);
   const [dateRange, setDateRange] = useState(getDefaultDateRange());
@@ -78,9 +79,9 @@ const Overview: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 transition-colors duration-200">
       {/* Top Bar */}
-      <div className="bg-gray-800 text-white py-3 px-6 shadow-sm">
+      <div className="bg-gray-800 dark:bg-gray-950 text-white py-3 px-6 shadow-sm">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
             <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -88,13 +89,16 @@ const Overview: React.FC = () => {
             </svg>
             <span className="font-bold">Weather</span>
           </div>
-          <div className="text-sm opacity-90">Overview</div>
+          <div className="flex items-center gap-4">
+            <div className="text-sm opacity-90">Overview</div>
+            <ThemeToggle />
+          </div>
         </div>
       </div>
       
       <div className="flex">
         {/* Left Vertical Sidebar */}
-        <div className="w-16 bg-white border-r border-gray-200 flex flex-col items-center py-4">
+        <div className="w-16 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex flex-col items-center py-4">
           <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ backgroundColor: '#E6F7FA' }}>
             <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect x="8" y="14" width="3" height="8" rx="1.5" stroke="#00A7C4" strokeWidth="2" fill="none" />
@@ -109,7 +113,7 @@ const Overview: React.FC = () => {
         <div className="flex-1 p-8">
           {/* Overview Header */}
           <div className="flex items-center mb-8">
-            <h1 className="text-2xl font-semibold text-gray-900">Overview</h1>
+            <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">Overview</h1>
           </div>
           
           {/* Filters Row - Simple Horizontal Layout */}
@@ -166,7 +170,7 @@ const Overview: React.FC = () => {
           {!loading && !error && weatherData && (
             <div className="grid grid-cols-2 gap-6">
               {/* Temperature Chart - Top Left */}
-              <div className="bg-white border border-gray-200 rounded-lg p-6 cursor-pointer hover:shadow-md transition-shadow" onClick={handleTemperatureChartClick}>
+              <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 cursor-pointer hover:shadow-md transition-shadow" onClick={handleTemperatureChartClick}>
                 <TemperatureChart 
                   data={temperatureData} 
                   onClick={handleTemperatureChartClick}
@@ -174,7 +178,7 @@ const Overview: React.FC = () => {
               </div>
 
               {/* Precipitation Chart - Top Right */}
-              <div className="bg-white border border-gray-200 rounded-lg p-6 cursor-pointer hover:shadow-md transition-shadow" onClick={handlePrecipitationChartClick}>
+              <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 cursor-pointer hover:shadow-md transition-shadow" onClick={handlePrecipitationChartClick}>
                 <PrecipitationChart 
                   data={precipitationData} 
                   onClick={handlePrecipitationChartClick}
@@ -182,7 +186,7 @@ const Overview: React.FC = () => {
               </div>
 
               {/* Wind Speed Chart - Bottom Left */}
-              <div className="bg-white border border-gray-200 rounded-lg p-6 cursor-pointer hover:shadow-md transition-shadow" onClick={handleWindSpeedChartClick}>
+              <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 cursor-pointer hover:shadow-md transition-shadow" onClick={handleWindSpeedChartClick}>
                 <WindSpeedChart 
                   data={windSpeedData} 
                   onClick={handleWindSpeedChartClick}
@@ -190,8 +194,8 @@ const Overview: React.FC = () => {
               </div>
 
               {/* Empty Cell - Bottom Right */}
-              <div className="bg-gray-50 border border-gray-200 rounded-lg p-6 flex items-center justify-center">
-                <div className="text-gray-400 text-center">
+              <div className="bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg p-6 flex items-center justify-center">
+                <div className="text-gray-400 dark:text-gray-500 text-center">
                   <div className="text-lg font-medium">Additional Chart</div>
                   <div className="text-sm">Coming Soon</div>
                 </div>
