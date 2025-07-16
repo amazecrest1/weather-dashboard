@@ -234,7 +234,8 @@ const searchOpenWeatherGeocoding = async (query: string): Promise<City[]> => {
   }
 };
 
-// Google Places API (requires API key)
+// Google Places API (requires API key) - Currently disabled
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const searchGooglePlaces = async (query: string): Promise<City[]> => {
   if (!GOOGLE_API_KEY || GOOGLE_API_KEY === 'your_google_api_key_here') {
     return []; // Skip if no API key
