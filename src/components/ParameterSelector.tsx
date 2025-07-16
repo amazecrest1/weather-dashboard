@@ -1,13 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-
-const HOURLY_PARAMETERS = [
-  { value: 'temperature_2m', label: 'Temperature' },
-  { value: 'relative_humidity_2m', label: 'Relative Humidity' },
-  { value: 'apparent_temperature', label: 'Apparent Temperature' },
-  { value: 'precipitation', label: 'Precipitation' },
-  { value: 'pressure_msl', label: 'Sea Level Pressure' },
-  { value: 'wind_speed_10m', label: 'Wind Speed (10m)' },
-];
+import { HOURLY_PARAMETERS } from '../constants/cities';
 
 interface ParameterSelectorProps {
   selectedParameters: string[];
@@ -59,7 +51,7 @@ const ParameterSelector: React.FC<ParameterSelectorProps> = ({ selectedParameter
             <span className="text-gray-500">{displayText}</span>
           )}
           {selectedParameters.map((param) => {
-            const paramObj = HOURLY_PARAMETERS.find(hp => hp.value === param);
+            const paramObj = HOURLY_PARAMETERS.find(hp => hp.key === param);
             return (
               <span
                 key={param}
@@ -90,12 +82,12 @@ const ParameterSelector: React.FC<ParameterSelectorProps> = ({ selectedParameter
         <div className="absolute z-50 w-full mt-2 bg-white border border-gray-200 rounded-xl shadow-lg max-h-60 overflow-y-auto">
           <div className="py-2">
             {HOURLY_PARAMETERS.map((param) => {
-              const isSelected = selectedParameters.includes(param.value);
+              const isSelected = selectedParameters.includes(param.key);
               const isDisabled = selectedParameters.length >= 2 && !isSelected;
               return (
                 <div
-                  key={param.value}
-                  onClick={() => !isDisabled && handleSelect(param.value)}
+                  key={param.key}
+                  onClick={() => !isDisabled && handleSelect(param.key)}
                   className={`px-4 py-3 cursor-pointer transition-colors flex items-center justify-between ${
                     isSelected
                       ? 'bg-blue-50 text-blue-900 border-r-2 border-blue-500' 

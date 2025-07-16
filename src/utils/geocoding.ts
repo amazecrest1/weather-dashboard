@@ -70,7 +70,7 @@ const searchCache = new Map<string, City[]>();
 // Debounce function to limit API calls
 let debounceTimer: NodeJS.Timeout;
 
-// API Keys (you can add your own keys here)
+// API Keys (currently not used - using OpenStreetMap Nominatim instead)
 const OPENWEATHER_API_KEY = 'your_openweather_api_key_here'; // Optional: Add your OpenWeatherMap API key
 const GOOGLE_API_KEY = 'your_google_api_key_here'; // Optional: Add your Google Places API key
 
