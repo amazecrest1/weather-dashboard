@@ -310,11 +310,12 @@ export const API_BASE_URL = 'https://archive-api.open-meteo.com/v1/archive';
 // Date range limits
 export const MAX_DATE_RANGE_DAYS = 90; // 3 months
 
-// Default date range (last 7 days)
+// Default date range (last 7 days, ending yesterday for complete data)
 export const getDefaultDateRange = () => {
   const end = new Date();
+  end.setDate(end.getDate() - 1); // Use yesterday to ensure complete data
   const start = new Date();
-  start.setDate(end.getDate() - 7);
+  start.setDate(end.getDate() - 6); // 7 days total
   
   return {
     start: start.toISOString().split('T')[0],

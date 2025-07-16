@@ -16,10 +16,23 @@ export const fetchWeatherData = async (params: WeatherApiParams): Promise<Weathe
     const response = await fetch(url.toString());
     
     if (!response.ok) {
-      throw new Error(`Weather API request failed: ${response.status} ${response.statusText}`);
+      // Handle specific error cases
+      if (response.status === 400) {
+        throw new Error('Invalid date range. Please select a valid date range within the last 90 days.');
+      } else if (response.status === 404) {
+        throw new Error('Weather data not available for the selected location or date range.');
+      } else {
+        throw new Error(`Weather API request failed: ${response.status} ${response.statusText}`);
+      }
     }
     
     const data: WeatherApiResponse = await response.json();
+    
+    // Check if we have any data
+    if (!data.daily && !data.hourly) {
+      throw new Error('No weather data available for the selected date range. Try selecting an earlier date range.');
+    }
+    
     return data;
   } catch (error) {
     console.error('Error fetching weather data:', error);
@@ -156,8 +169,8 @@ export const getMinimumDate = (maxDaysBack: number = 90): string => {
   return minDate.toISOString().split('T')[0];
 };
 
-// Validate date range
-export const validateDateRange = (startDate: string, endDate: string, maxDays: number): boolean => {
+// Validate date range with better handling for current day
+export const validateDateRange = (startDate: string, endDate: string, maxDays: number): { isValid: boolean; message?: string } => {
   const start = new Date(startDate);
   const end = new Date(endDate);
   const today = new Date();
@@ -165,28 +178,50 @@ export const validateDateRange = (startDate: string, endDate: string, maxDays: n
   
   // Check if dates are valid
   if (isNaN(start.getTime()) || isNaN(end.getTime())) {
-    return false;
+    return { isValid: false, message: 'Invalid date format' };
   }
   
   // Check if start date is before end date
   if (start >= end) {
-    return false;
+    return { isValid: false, message: 'Start date must be before end date' };
   }
   
   // Check if dates are not in the future
   if (start > today || end > today) {
-    return false;
+    return { isValid: false, message: 'Cannot select future dates' };
   }
   
   // Check if dates are not older than 90 days
   if (start < minAllowedDate || end < minAllowedDate) {
-    return false;
+    return { isValid: false, message: 'Data is only available for the last 90 days' };
   }
   
   // Check if date range is within limits
   if (getDaysDifference(startDate, endDate) > maxDays) {
-    return false;
+    return { isValid: false, message: `Date range cannot exceed ${maxDays} days` };
   }
   
-  return true;
+  // Check if end date is today (might have limited data)
+  const isEndDateToday = end.toDateString() === today.toDateString();
+  if (isEndDateToday) {
+    return { isValid: true, message: 'Note: Today\'s data may be incomplete' };
+  }
+  
+  return { isValid: true };
+};
+
+// Get recommended end date (yesterday for complete data)
+export const getRecommendedEndDate = (): string => {
+  const yesterday = new Date();
+  yesterday.setDate(yesterday.getDate() - 1);
+  return yesterday.toISOString().split('T')[0];
+};
+
+// Check if date range includes current day
+export const includesCurrentDay = (startDate: string, endDate: string): boolean => {
+  const start = new Date(startDate);
+  const end = new Date(endDate);
+  const today = new Date();
+  
+  return start <= today && end >= today;
 }; 
