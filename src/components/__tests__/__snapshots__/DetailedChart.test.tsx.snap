@@ -1,0 +1,134 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DetailedChart matches snapshot with empty data 1`] = `
+<div
+  data-testid="responsive-container"
+>
+  <div
+    data-testid="line-chart"
+  >
+    <div
+      data-testid="cartesian-grid"
+    >
+      CartesianGrid
+    </div>
+    <div
+      data-testid="x-axis"
+    >
+      XAxis
+    </div>
+    <div
+      data-testid="y-axis"
+    >
+      YAxis
+    </div>
+    <div
+      data-testid="tooltip"
+    >
+      Tooltip
+    </div>
+    <div
+      data-testid="legend"
+    >
+      Legend
+    </div>
+    <div
+      data-testid="line-Temperature (°C)"
+    >
+      Temperature (°C)
+    </div>
+  </div>
+</div>
+`;
+
+exports[`DetailedChart matches snapshot with one parameter 1`] = `
+<div
+  data-testid="responsive-container"
+>
+  <div
+    data-testid="line-chart"
+  >
+    <div
+      data-testid="cartesian-grid"
+    >
+      CartesianGrid
+    </div>
+    <div
+      data-testid="x-axis"
+    >
+      XAxis
+    </div>
+    <div
+      data-testid="y-axis"
+    >
+      YAxis
+    </div>
+    <div
+      data-testid="tooltip"
+    >
+      Tooltip
+    </div>
+    <div
+      data-testid="legend"
+    >
+      Legend
+    </div>
+    <div
+      data-testid="line-Temperature (°C)"
+    >
+      Temperature (°C)
+    </div>
+  </div>
+</div>
+`;
+
+exports[`DetailedChart matches snapshot with two parameters 1`] = `
+<div
+  data-testid="responsive-container"
+>
+  <div
+    data-testid="line-chart"
+  >
+    <div
+      data-testid="cartesian-grid"
+    >
+      CartesianGrid
+    </div>
+    <div
+      data-testid="x-axis"
+    >
+      XAxis
+    </div>
+    <div
+      data-testid="y-axis"
+    >
+      YAxis
+    </div>
+    <div
+      data-testid="y-axis"
+    >
+      YAxis
+    </div>
+    <div
+      data-testid="tooltip"
+    >
+      Tooltip
+    </div>
+    <div
+      data-testid="legend"
+    >
+      Legend
+    </div>
+    <div
+      data-testid="line-Temperature (°C)"
+    >
+      Temperature (°C)
+    </div>
+    <div
+      data-testid="line-Wind Speed (km/h)"
+    >
+      Wind Speed (km/h)
+    </div>
+  </div>
+</div>
+`;

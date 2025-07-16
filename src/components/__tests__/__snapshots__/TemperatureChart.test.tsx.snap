@@ -1,0 +1,229 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TemperatureChart matches snapshot with custom className 1`] = `
+<div
+  class="custom-class"
+>
+  <div
+    class="flex items-center mb-4"
+  >
+    <div
+      class="flex items-center"
+    >
+      <svg
+        class="w-5 h-5 text-gray-600 mr-2"
+        fill="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M12 2C10.34 2 9 3.34 9 5v6.5c-1.21.91-2 2.37-2 3.5a5 5 0 0 0 10 0c0-1.13-.79-2.59-2-3.5V5c0-1.66-1.34-3-3-3zm-1 3h2v2h-2V5zm0 3h2v2h-2V8zm0 3h2v2h-2v-2z"
+        />
+      </svg>
+      <h3
+        class="text-lg font-medium text-gray-900"
+      >
+        Temperature
+      </h3>
+    </div>
+  </div>
+  <div
+    style="width: 100%; height: 350px;"
+  >
+    <div
+      data-testid="responsive-container"
+    >
+      <div
+        data-testid="line-chart"
+      >
+        <div
+          data-testid="x-axis"
+        >
+          XAxis
+        </div>
+        <div
+          data-testid="y-axis"
+        >
+          YAxis
+        </div>
+        <div
+          data-testid="tooltip"
+        >
+          Tooltip
+        </div>
+        <div
+          data-testid="legend"
+        >
+          Legend
+        </div>
+        <div
+          data-testid="line-Maximum"
+        >
+          Maximum
+        </div>
+        <div
+          data-testid="line-Average"
+        >
+          Average
+        </div>
+        <div
+          data-testid="line-Minimum"
+        >
+          Minimum
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`TemperatureChart matches snapshot with data 1`] = `
+<div
+  class=""
+>
+  <div
+    class="flex items-center mb-4"
+  >
+    <div
+      class="flex items-center"
+    >
+      <svg
+        class="w-5 h-5 text-gray-600 mr-2"
+        fill="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M12 2C10.34 2 9 3.34 9 5v6.5c-1.21.91-2 2.37-2 3.5a5 5 0 0 0 10 0c0-1.13-.79-2.59-2-3.5V5c0-1.66-1.34-3-3-3zm-1 3h2v2h-2V5zm0 3h2v2h-2V8zm0 3h2v2h-2v-2z"
+        />
+      </svg>
+      <h3
+        class="text-lg font-medium text-gray-900"
+      >
+        Temperature
+      </h3>
+    </div>
+  </div>
+  <div
+    style="width: 100%; height: 350px;"
+  >
+    <div
+      data-testid="responsive-container"
+    >
+      <div
+        data-testid="line-chart"
+      >
+        <div
+          data-testid="x-axis"
+        >
+          XAxis
+        </div>
+        <div
+          data-testid="y-axis"
+        >
+          YAxis
+        </div>
+        <div
+          data-testid="tooltip"
+        >
+          Tooltip
+        </div>
+        <div
+          data-testid="legend"
+        >
+          Legend
+        </div>
+        <div
+          data-testid="line-Maximum"
+        >
+          Maximum
+        </div>
+        <div
+          data-testid="line-Average"
+        >
+          Average
+        </div>
+        <div
+          data-testid="line-Minimum"
+        >
+          Minimum
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`TemperatureChart matches snapshot with empty data 1`] = `
+<div
+  class=""
+>
+  <div
+    class="flex items-center mb-4"
+  >
+    <div
+      class="flex items-center"
+    >
+      <svg
+        class="w-5 h-5 text-gray-600 mr-2"
+        fill="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M12 2C10.34 2 9 3.34 9 5v6.5c-1.21.91-2 2.37-2 3.5a5 5 0 0 0 10 0c0-1.13-.79-2.59-2-3.5V5c0-1.66-1.34-3-3-3zm-1 3h2v2h-2V5zm0 3h2v2h-2V8zm0 3h2v2h-2v-2z"
+        />
+      </svg>
+      <h3
+        class="text-lg font-medium text-gray-900"
+      >
+        Temperature
+      </h3>
+    </div>
+  </div>
+  <div
+    style="width: 100%; height: 350px;"
+  >
+    <div
+      data-testid="responsive-container"
+    >
+      <div
+        data-testid="line-chart"
+      >
+        <div
+          data-testid="x-axis"
+        >
+          XAxis
+        </div>
+        <div
+          data-testid="y-axis"
+        >
+          YAxis
+        </div>
+        <div
+          data-testid="tooltip"
+        >
+          Tooltip
+        </div>
+        <div
+          data-testid="legend"
+        >
+          Legend
+        </div>
+        <div
+          data-testid="line-Maximum"
+        >
+          Maximum
+        </div>
+        <div
+          data-testid="line-Average"
+        >
+          Average
+        </div>
+        <div
+          data-testid="line-Minimum"
+        >
+          Minimum
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

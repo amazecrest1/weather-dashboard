@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PrecipitationChart matches snapshot with data 1`] = `
+<div
+  class=""
+>
+  <div
+    class="flex items-center mb-4"
+  >
+    <div
+      class="flex items-center"
+    >
+      <svg
+        class="w-5 h-5 text-gray-600 mr-2"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+        />
+      </svg>
+      <h3
+        class="text-lg font-medium text-gray-900"
+      >
+        Precipitation
+      </h3>
+    </div>
+  </div>
+  <div
+    style="width: 100%; height: 350px;"
+  >
+    <div
+      class="recharts-responsive-container"
+      style="width: 100%; height: 100%; min-width: 0;"
+    />
+  </div>
+</div>
+`;
+
+exports[`PrecipitationChart matches snapshot with empty data 1`] = `
+<div
+  class=""
+>
+  <div
+    class="flex items-center mb-4"
+  >
+    <div
+      class="flex items-center"
+    >
+      <svg
+        class="w-5 h-5 text-gray-600 mr-2"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+        />
+      </svg>
+      <h3
+        class="text-lg font-medium text-gray-900"
+      >
+        Precipitation
+      </h3>
+    </div>
+  </div>
+  <div
+    style="width: 100%; height: 350px;"
+  >
+    <div
+      class="recharts-responsive-container"
+      style="width: 100%; height: 100%; min-width: 0;"
+    />
+  </div>
+</div>
+`;

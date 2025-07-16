@@ -1,0 +1,161 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MultiParameterChart matches snapshot with empty data 1`] = `
+<div
+  class="card p-6 "
+>
+  <h3
+    class="text-lg font-semibold text-gray-900 mb-4"
+  >
+    Hourly Weather Parameters
+  </h3>
+  <div
+    data-testid="responsive-container"
+  >
+    <div
+      data-testid="line-chart"
+    >
+      <div
+        data-testid="cartesian-grid"
+      >
+        CartesianGrid
+      </div>
+      <div
+        data-testid="x-axis"
+      >
+        XAxis
+      </div>
+      <div
+        data-testid="y-axis"
+      >
+        YAxis
+      </div>
+      <div
+        data-testid="tooltip"
+      >
+        Tooltip
+      </div>
+      <div
+        data-testid="legend"
+      >
+        Legend
+      </div>
+      <div
+        data-testid="line-Temperature"
+      >
+        Temperature
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`MultiParameterChart matches snapshot with one parameter 1`] = `
+<div
+  class="card p-6 "
+>
+  <h3
+    class="text-lg font-semibold text-gray-900 mb-4"
+  >
+    Hourly Weather Parameters
+  </h3>
+  <div
+    data-testid="responsive-container"
+  >
+    <div
+      data-testid="line-chart"
+    >
+      <div
+        data-testid="cartesian-grid"
+      >
+        CartesianGrid
+      </div>
+      <div
+        data-testid="x-axis"
+      >
+        XAxis
+      </div>
+      <div
+        data-testid="y-axis"
+      >
+        YAxis
+      </div>
+      <div
+        data-testid="tooltip"
+      >
+        Tooltip
+      </div>
+      <div
+        data-testid="legend"
+      >
+        Legend
+      </div>
+      <div
+        data-testid="line-Temperature"
+      >
+        Temperature
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`MultiParameterChart matches snapshot with two parameters 1`] = `
+<div
+  class="card p-6 "
+>
+  <h3
+    class="text-lg font-semibold text-gray-900 mb-4"
+  >
+    Hourly Weather Parameters
+  </h3>
+  <div
+    data-testid="responsive-container"
+  >
+    <div
+      data-testid="line-chart"
+    >
+      <div
+        data-testid="cartesian-grid"
+      >
+        CartesianGrid
+      </div>
+      <div
+        data-testid="x-axis"
+      >
+        XAxis
+      </div>
+      <div
+        data-testid="y-axis"
+      >
+        YAxis
+      </div>
+      <div
+        data-testid="y-axis"
+      >
+        YAxis
+      </div>
+      <div
+        data-testid="tooltip"
+      >
+        Tooltip
+      </div>
+      <div
+        data-testid="legend"
+      >
+        Legend
+      </div>
+      <div
+        data-testid="line-Temperature"
+      >
+        Temperature
+      </div>
+      <div
+        data-testid="line-Wind Speed (10m)"
+      >
+        Wind Speed (10m)
+      </div>
+    </div>
+  </div>
+</div>
+`;

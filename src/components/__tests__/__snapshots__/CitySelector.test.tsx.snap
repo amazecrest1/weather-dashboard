@@ -1,0 +1,281 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CitySelector matches snapshot with default state 1`] = `
+<div
+  class="relative flex flex-col "
+  style="z-index: 1000;"
+>
+  <div
+    class="relative"
+  >
+    <button
+      class="w-full px-6 py-3 border border-gray-200 rounded-xl bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-left flex items-center justify-between shadow-lg hover:border-gray-300 transition-colors font-medium"
+      style="min-height: 56px;"
+    >
+      <span
+        class="truncate"
+      >
+        New York, United States
+      </span>
+      <span
+        class="flex items-center justify-center ml-3"
+      >
+        <svg
+          class="w-6 h-6 text-gray-400"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M19 9l-7 7-7-7"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </span>
+    </button>
+  </div>
+</div>
+`;
+
+exports[`CitySelector matches snapshot with different selected city 1`] = `
+<div
+  class="relative flex flex-col "
+  style="z-index: 1000;"
+>
+  <div
+    class="relative"
+  >
+    <button
+      class="w-full px-6 py-3 border border-gray-200 rounded-xl bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-left flex items-center justify-between shadow-lg hover:border-gray-300 transition-colors font-medium"
+      style="min-height: 56px;"
+    >
+      <span
+        class="truncate"
+      >
+        London, United Kingdom
+      </span>
+      <span
+        class="flex items-center justify-center ml-3"
+      >
+        <svg
+          class="w-6 h-6 text-gray-400"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M19 9l-7 7-7-7"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </span>
+    </button>
+  </div>
+</div>
+`;
+
+exports[`CitySelector matches snapshot with dropdown open 1`] = `
+<div
+  class="relative flex flex-col "
+  style="z-index: 1000;"
+>
+  <div
+    class="relative"
+  >
+    <button
+      class="w-full px-6 py-3 border border-gray-200 rounded-xl bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-left flex items-center justify-between shadow-lg hover:border-gray-300 transition-colors font-medium"
+      style="min-height: 56px;"
+    >
+      <span
+        class="truncate"
+      >
+        New York, United States
+      </span>
+      <span
+        class="flex items-center justify-center ml-3"
+      >
+        <svg
+          class="w-6 h-6 text-gray-400"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M19 9l-7 7-7-7"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </span>
+    </button>
+  </div>
+  <div
+    class="absolute z-[9999] top-full mt-2 w-full bg-white border border-gray-200 rounded-xl shadow-lg"
+    style="box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.10); border: 1px solid #e5e7eb; margin-top: 8px; min-width: 260px;"
+  >
+    <div
+      class="p-3 border-b border-gray-100 bg-gray-50 rounded-t-xl"
+    >
+      <input
+        class="w-full px-3 py-2 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
+        placeholder="Search for a city..."
+        type="text"
+        value=""
+      />
+    </div>
+    <div
+      class="max-h-60 overflow-y-auto"
+    >
+      <div>
+        <div
+          class="px-4 py-3 cursor-pointer flex items-center justify-between transition-colors border-b border-gray-100 last:border-b-0 rounded-lg mx-2 my-1 hover:bg-gray-100 font-semibold text-gray-700 bg-gray-100 hover:bg-blue-50"
+        >
+          <div
+            class="flex flex-col flex-1 min-w-0"
+          >
+            <span
+              class="font-medium text-gray-900 truncate"
+            >
+              All Cities Selected
+            </span>
+          </div>
+          <div
+            class="flex items-center gap-2 flex-shrink-0"
+          />
+        </div>
+        <div
+          class="px-4 py-3 cursor-pointer flex items-center justify-between transition-colors border-b border-gray-100 last:border-b-0 rounded-lg mx-2 my-1 hover:bg-gray-100 "
+        >
+          <div
+            class="flex flex-col flex-1 min-w-0"
+          >
+            <span
+              class="font-medium text-gray-900 truncate"
+            >
+              New York
+            </span>
+            <span
+              class="text-sm text-gray-500 truncate"
+            >
+              United States
+            </span>
+          </div>
+          <div
+            class="flex items-center gap-2 flex-shrink-0"
+          />
+        </div>
+        <div
+          class="px-4 py-3 cursor-pointer flex items-center justify-between transition-colors border-b border-gray-100 last:border-b-0 rounded-lg mx-2 my-1 hover:bg-gray-100 "
+        >
+          <div
+            class="flex flex-col flex-1 min-w-0"
+          >
+            <span
+              class="font-medium text-gray-900 truncate"
+            >
+              London
+            </span>
+            <span
+              class="text-sm text-gray-500 truncate"
+            >
+              United Kingdom
+            </span>
+          </div>
+          <div
+            class="flex items-center gap-2 flex-shrink-0"
+          />
+        </div>
+        <div
+          class="px-4 py-3 cursor-pointer flex items-center justify-between transition-colors border-b border-gray-100 last:border-b-0 rounded-lg mx-2 my-1 hover:bg-gray-100 "
+        >
+          <div
+            class="flex flex-col flex-1 min-w-0"
+          >
+            <span
+              class="font-medium text-gray-900 truncate"
+            >
+              Tokyo
+            </span>
+            <span
+              class="text-sm text-gray-500 truncate"
+            >
+              Japan
+            </span>
+          </div>
+          <div
+            class="flex items-center gap-2 flex-shrink-0"
+          />
+        </div>
+        <div
+          class="px-4 py-3 cursor-pointer flex items-center justify-between transition-colors border-b border-gray-100 last:border-b-0 rounded-lg mx-2 my-1 hover:bg-gray-100 "
+        >
+          <div
+            class="flex flex-col flex-1 min-w-0"
+          >
+            <span
+              class="font-medium text-gray-900 truncate"
+            >
+              Sydney
+            </span>
+            <span
+              class="text-sm text-gray-500 truncate"
+            >
+              Australia
+            </span>
+          </div>
+          <div
+            class="flex items-center gap-2 flex-shrink-0"
+          />
+        </div>
+        <div
+          class="px-4 py-3 cursor-pointer flex items-center justify-between transition-colors border-b border-gray-100 last:border-b-0 rounded-lg mx-2 my-1 hover:bg-gray-100 "
+        >
+          <div
+            class="flex flex-col flex-1 min-w-0"
+          >
+            <span
+              class="font-medium text-gray-900 truncate"
+            >
+              Paris
+            </span>
+            <span
+              class="text-sm text-gray-500 truncate"
+            >
+              France
+            </span>
+          </div>
+          <div
+            class="flex items-center gap-2 flex-shrink-0"
+          />
+        </div>
+        <div
+          class="px-4 py-3 cursor-pointer flex items-center justify-between transition-colors border-b border-gray-100 last:border-b-0 rounded-lg mx-2 my-1 hover:bg-gray-100 "
+        >
+          <div
+            class="flex flex-col flex-1 min-w-0"
+          >
+            <span
+              class="font-medium text-gray-900 truncate"
+            >
+              Dubai
+            </span>
+            <span
+              class="text-sm text-gray-500 truncate"
+            >
+              United Arab Emirates
+            </span>
+          </div>
+          <div
+            class="flex items-center gap-2 flex-shrink-0"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

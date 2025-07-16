@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DateRangePicker matches snapshot with default date range 1`] = `
+<div
+  class="relative flex flex-col "
+>
+  <button
+    class="w-full px-6 py-3 border border-gray-200 rounded-xl bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-left flex items-center justify-between shadow-lg hover:border-gray-300 transition-colors font-medium"
+    style="min-height: 56px;"
+    type="button"
+  >
+    <span
+      class="truncate"
+    >
+      Jan 1, 2024 - Jan 7, 2024
+    </span>
+    <span
+      class="flex items-center justify-center ml-3"
+    >
+      <svg
+        class="w-6 h-6 text-gray-400"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M19 9l-7 7-7-7"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </span>
+  </button>
+</div>
+`;
+
+exports[`DateRangePicker matches snapshot with different date range 1`] = `
+<div
+  class="relative flex flex-col "
+>
+  <button
+    class="w-full px-6 py-3 border border-gray-200 rounded-xl bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-left flex items-center justify-between shadow-lg hover:border-gray-300 transition-colors font-medium"
+    style="min-height: 56px;"
+    type="button"
+  >
+    <span
+      class="truncate"
+    >
+      Feb 1, 2024 - Feb 15, 2024
+    </span>
+    <span
+      class="flex items-center justify-center ml-3"
+    >
+      <svg
+        class="w-6 h-6 text-gray-400"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M19 9l-7 7-7-7"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </span>
+  </button>
+</div>
+`;
