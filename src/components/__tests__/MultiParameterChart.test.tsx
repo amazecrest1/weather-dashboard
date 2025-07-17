@@ -3,7 +3,6 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import MultiParameterChart from '../MultiParameterChart';
 
-// Mock recharts
 jest.mock('recharts', () => ({
   LineChart: ({ children }: { children: React.ReactNode }) => <div data-testid="line-chart">{children}</div>,
   Line: ({ name }: { name: string }) => <div data-testid={`line-${name}`}>{name}</div>,

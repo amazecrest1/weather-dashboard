@@ -47,7 +47,6 @@ const Overview = () => {
   const precipitationData = weatherData ? transformPrecipitationData(weatherData) : [];
   const windSpeedData = weatherData ? transformWindSpeedData(weatherData) : [];
 
-  // Navigation handlers for charts
   const handleTemperatureChartClick = () => {
     navigate('/detailed', { 
       state: { 
@@ -153,21 +152,23 @@ const Overview = () => {
           {/* Charts Grid with Filters at Top */}
           {!loading && !error && weatherData && (
             <div className="space-y-4 sm:space-y-6">
-              {/* Filters Row - Left Half */}
-              <div className="flex flex-row items-center gap-4 mb-6 sm:mb-8 w-1/2">
-                <div className="flex-1 min-w-0">
-                  <DateRangePicker
-                    dateRange={dateRange}
-                    onDateRangeChange={setDateRange}
-                    className="w-full"
-                  />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <CitySelector
-                    selectedCity={selectedCity}
-                    onCityChange={setSelectedCity}
-                    className="w-full"
-                  />
+              {/* Filters Row - Stacked on mobile, side by side on tablet/desktop, half width on desktop */}
+              <div className="w-full sm:w-1/2 mb-6 sm:mb-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="min-w-0">
+                    <DateRangePicker
+                      dateRange={dateRange}
+                      onDateRangeChange={setDateRange}
+                      className="w-full"
+                    />
+                  </div>
+                  <div className="min-w-0">
+                    <CitySelector
+                      selectedCity={selectedCity}
+                      onCityChange={setSelectedCity}
+                      className="w-full"
+                    />
+                  </div>
                 </div>
               </div>
 

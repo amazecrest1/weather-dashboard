@@ -1,6 +1,5 @@
 import { City } from '../types/weather';
 
-// Multiple API response interfaces
 interface NominatimResult {
   place_id: number;
   licence: string;
@@ -64,37 +63,28 @@ interface GooglePlaceDetails {
   };
 }
 
-// Cache for search results to avoid excessive API calls
 const searchCache = new Map<string, City[]>();
-
-// Debounce function to limit API calls
 let debounceTimer: NodeJS.Timeout;
 
-// API Keys (currently not used - using OpenStreetMap Nominatim instead)
-const OPENWEATHER_API_KEY = 'your_openweather_api_key_here'; // Optional: Add your OpenWeatherMap API key
-const GOOGLE_API_KEY = 'your_google_api_key_here'; // Optional: Add your Google Places API key
+const OPENWEATHER_API_KEY = 'your_openweather_api_key_here';
+const GOOGLE_API_KEY = 'your_google_api_key_here';
 
-// Enhanced city search with multiple API sources
 export const searchCities = async (query: string): Promise<City[]> => {
   if (!query.trim() || query.length < 2) {
     return [];
   }
 
-  // Check cache first
   const cacheKey = query.toLowerCase().trim();
   if (searchCache.has(cacheKey)) {
     return searchCache.get(cacheKey)!;
   }
 
   try {
-    // Try multiple APIs in parallel for better results
     const results = await Promise.allSettled([
       searchNominatim(query),
       searchOpenWeatherGeocoding(query),
-      // searchGooglePlaces(query), // Uncomment if you have Google API key
     ]);
 
-    // Combine and deduplicate results
     const allCities: City[] = [];
     const seenNames = new Set<string>();
 
@@ -110,16 +100,13 @@ export const searchCities = async (query: string): Promise<City[]> => {
       }
     });
 
-    // Sort by relevance and limit results
     const sortedCities = allCities
       .sort((a, b) => {
-        // Prioritize exact name matches
         const aExact = a.name.toLowerCase() === query.toLowerCase();
         const bExact = b.name.toLowerCase() === query.toLowerCase();
         if (aExact && !bExact) return -1;
         if (!aExact && bExact) return 1;
         
-        // Then by country relevance
         const aCountryMatch = a.country.toLowerCase().includes(query.toLowerCase());
         const bCountryMatch = b.country.toLowerCase().includes(query.toLowerCase());
         if (aCountryMatch && !bCountryMatch) return -1;
@@ -129,7 +116,6 @@ export const searchCities = async (query: string): Promise<City[]> => {
       })
       .slice(0, 10);
 
-    // Cache the results
     searchCache.set(cacheKey, sortedCities);
     
     return sortedCities;
@@ -139,7 +125,6 @@ export const searchCities = async (query: string): Promise<City[]> => {
   }
 };
 
-// Nominatim search (OpenStreetMap)
 const searchNominatim = async (query: string): Promise<City[]> => {
   try {
     const response = await fetch(
@@ -163,11 +148,10 @@ const searchNominatim = async (query: string): Promise<City[]> => {
 
     return results
       .filter(result => {
-        // Filter for cities, towns, and villages
         return (
           result.class === 'place' &&
           ['city', 'town', 'village', 'municipality'].includes(result.type) &&
-          result.importance > 0.3 // Filter out less important places
+          result.importance > 0.3
         );
       })
       .map(result => {
@@ -195,10 +179,9 @@ const searchNominatim = async (query: string): Promise<City[]> => {
   }
 };
 
-// OpenWeatherMap Geocoding API
 const searchOpenWeatherGeocoding = async (query: string): Promise<City[]> => {
   if (!OPENWEATHER_API_KEY || OPENWEATHER_API_KEY === 'your_openweather_api_key_here') {
-    return []; // Skip if no API key
+    return [];
   }
 
   try {
@@ -234,15 +217,13 @@ const searchOpenWeatherGeocoding = async (query: string): Promise<City[]> => {
   }
 };
 
-// Google Places API (requires API key) - Currently disabled
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const searchGooglePlaces = async (query: string): Promise<City[]> => {
   if (!GOOGLE_API_KEY || GOOGLE_API_KEY === 'your_google_api_key_here') {
-    return []; // Skip if no API key
+    return [];
   }
 
   try {
-    // First, get place predictions
     const predictionsResponse = await fetch(
       `https://maps.googleapis.com/maps/api/place/autocomplete/json?` +
       new URLSearchParams({
@@ -258,7 +239,6 @@ const searchGooglePlaces = async (query: string): Promise<City[]> => {
 
     const predictionsData: GooglePlacesResult = await predictionsResponse.json();
     
-    // Get details for each prediction
     const placeDetails = await Promise.all(
       predictionsData.predictions.slice(0, 5).map(async (prediction) => {
         try {
@@ -283,26 +263,27 @@ const searchGooglePlaces = async (query: string): Promise<City[]> => {
     );
 
     return placeDetails
-      .filter(details => details !== null)
-      .map(details => {
-        const country = details!.address_components.find(comp => 
+      .filter((place): place is GooglePlaceDetails['result'] => place !== null)
+      .map(place => {
+        const addressComponents = place.address_components;
+        const cityComponent = addressComponents.find(comp => 
+          comp.types.includes('locality') || comp.types.includes('administrative_area_level_1')
+        );
+        const countryComponent = addressComponents.find(comp => 
           comp.types.includes('country')
-        )?.long_name || 'Unknown';
+        );
         
-        const state = details!.address_components.find(comp => 
-          comp.types.includes('administrative_area_level_1')
-        )?.long_name || '';
-
         return {
-          id: `google-${details!.geometry.location.lat}-${details!.geometry.location.lng}`,
-          name: details!.formatted_address.split(',')[0],
-          country: country,
-          state: state,
-          latitude: details!.geometry.location.lat,
-          longitude: details!.geometry.location.lng,
+          id: `google-${place.geometry.location.lat}-${place.geometry.location.lng}`,
+          name: cityComponent?.long_name || place.formatted_address.split(',')[0],
+          country: countryComponent?.long_name || 'Unknown',
+          state: '',
+          latitude: place.geometry.location.lat,
+          longitude: place.geometry.location.lng,
           isCustom: true
         };
-      });
+      })
+      .filter(city => city.name && city.country);
   } catch (error) {
     console.error('Google Places search error:', error);
     return [];
@@ -317,37 +298,32 @@ export const debouncedSearchCities = (query: string, callback: (cities: City[]) 
   }, 300);
 };
 
-// Local storage keys
-const CUSTOM_CITIES_KEY = 'weather-dashboard-custom-cities';
-
 export const saveCustomCity = (city: City): void => {
   const customCities = getCustomCities();
   const exists = customCities.some(c => c.id === city.id);
   
   if (!exists) {
     customCities.push(city);
-    localStorage.setItem(CUSTOM_CITIES_KEY, JSON.stringify(customCities));
+    localStorage.setItem('customCities', JSON.stringify(customCities));
   }
 };
 
 export const getCustomCities = (): City[] => {
   try {
-    const stored = localStorage.getItem(CUSTOM_CITIES_KEY);
-    if (stored) {
-      return JSON.parse(stored);
-    }
+    const stored = localStorage.getItem('customCities');
+    return stored ? JSON.parse(stored) : [];
   } catch (error) {
     console.error('Error loading custom cities:', error);
+    return [];
   }
-  return [];
 };
 
 export const removeCustomCity = (cityId: string): void => {
   const customCities = getCustomCities();
-  const filtered = customCities.filter(c => c.id !== cityId);
-  localStorage.setItem(CUSTOM_CITIES_KEY, JSON.stringify(filtered));
+  const filtered = customCities.filter(city => city.id !== cityId);
+  localStorage.setItem('customCities', JSON.stringify(filtered));
 };
 
 export const clearCustomCities = (): void => {
-  localStorage.removeItem(CUSTOM_CITIES_KEY);
+  localStorage.removeItem('customCities');
 }; 

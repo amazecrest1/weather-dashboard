@@ -19,10 +19,6 @@ const MultiParameterChart = ({
   const [hoveredPoint, setHoveredPoint] = useState<{ x: number; y: number; data: any } | null>(null);
   const chartRef = useRef<HTMLDivElement>(null);
   
-  // Debug: Log the current theme
-  console.log('Current theme:', theme);
-  console.log('Document classes:', document.documentElement.classList.toString());
-  
   const getParameterConfig = (key: string): ParameterConfig | undefined => {
     return HOURLY_PARAMETERS.find(p => p.key === key);
   };
@@ -31,7 +27,6 @@ const MultiParameterChart = ({
   const param1 = getParameterConfig(selectedParameters[0]);
   const param2 = getParameterConfig(selectedParameters[1]);
 
-  // Determine Y-axis assignment
   const useRightAxis = hasDualAxis && param1 && param2 && param1.yAxisId !== param2.yAxisId;
 
   useEffect(() => {
@@ -49,7 +44,6 @@ const MultiParameterChart = ({
   }, []);
 
   const handleChartMouseMove = (e: any) => {
-    // Only show tooltip if we have valid data
     if (e && e.activePayload && e.activePayload.length > 0 && e.activeCoordinate) {
       setHoveredPoint({
         x: e.activeCoordinate.x,
@@ -76,12 +70,12 @@ const MultiParameterChart = ({
             ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 border border-gray-600 shadow-xl shadow-gray-900/50 backdrop-blur-sm' 
             : 'bg-gradient-to-br from-white via-gray-50 to-white border border-gray-200 shadow-lg backdrop-blur-sm'
         }`}
-        style={{ minHeight: '250px', height: '250px' }}
+        style={{ minHeight: '400px', height: '400px' }}
       >
         <ResponsiveContainer width="100%" height="100%">
         <LineChart 
           data={data}
-          margin={{ top: 10, right: 15, left: 10, bottom: 50 }}
+          margin={{ top: 30, right: 15, left: 10, bottom: 20 }}
           key={`chart-${selectedParameters.join('-')}-${data.length}`}
           onMouseMove={handleChartMouseMove}
           onMouseLeave={() => setHoveredPoint(null)}
@@ -99,7 +93,7 @@ const MultiParameterChart = ({
             }}
             angle={window.innerWidth < 768 ? -90 : -45}
             textAnchor="end"
-            height={window.innerWidth < 768 ? 35 : 60}
+            height={window.innerWidth < 768 ? 50 : 60}
             interval="preserveStartEnd"
             stroke={theme === 'dark' ? '#4B5563' : '#D1D5DB'}
           />
@@ -141,7 +135,7 @@ const MultiParameterChart = ({
             wrapperStyle={{
               color: theme === 'dark' ? '#F9FAFB' : '#111827',
               fontSize: window.innerWidth < 768 ? '9px' : '12px',
-              paddingTop: '10px',
+              paddingTop: '30px',
               marginBottom: '2px'
             }}
             verticalAlign="bottom"

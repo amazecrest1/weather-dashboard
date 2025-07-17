@@ -53,7 +53,7 @@ const TemperatureChart: React.FC<TemperatureChartProps> = ({ data, className = '
             <Tooltip 
               formatter={(value: number, name: string) => [
                 `${value.toFixed(1)}°C`, 
-                name.charAt(0).toUpperCase() + name.slice(1) // Capitalize name for display
+                name.charAt(0).toUpperCase() + name.slice(1)
               ]}
               labelFormatter={(label) => {
                 const date = new Date(label);
@@ -78,7 +78,7 @@ const TemperatureChart: React.FC<TemperatureChartProps> = ({ data, className = '
             <Line 
               type="monotone" 
               dataKey="max" 
-              stroke="#fbbf24" // Amber 400
+              stroke="#fbbf24"
               strokeWidth={2.5}
               name="Maximum"
               dot={false}
@@ -87,7 +87,7 @@ const TemperatureChart: React.FC<TemperatureChartProps> = ({ data, className = '
             <Line 
               type="monotone" 
               dataKey="mean" 
-              stroke="#fcd34d" // Amber 300
+              stroke="#fcd34d"
               strokeWidth={2.5}
               name="Average"
               dot={false}
@@ -96,7 +96,7 @@ const TemperatureChart: React.FC<TemperatureChartProps> = ({ data, className = '
             <Line 
               type="monotone" 
               dataKey="min" 
-              stroke="#f59e0b" // Amber 500
+              stroke="#f59e0b"
               strokeWidth={2.5}
               name="Minimum"
               dot={false}

@@ -5,7 +5,7 @@ import DetailedInsights from './pages/DetailedInsights';
 import { useTheme } from './hooks/useTheme';
 
 function App() {
-  useTheme(); // Initialize theme at app level
+  useTheme();
 
   return (
     <Router>

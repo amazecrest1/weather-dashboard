@@ -35,10 +35,8 @@ describe('CitySelector', () => {
   it('calls onCityChange when a city is selected', () => {
     render(<CitySelector {...defaultProps} />);
     fireEvent.click(screen.getByRole('button'));
-    // Find the city option by label, then click it
     const londonOption = screen.getByText('London');
     expect(londonOption).toBeInTheDocument();
-    // Optionally, check its country is rendered as a sibling
     const country = londonOption.parentElement?.querySelector('.text-sm');
     expect(country).toHaveTextContent('United Kingdom');
     fireEvent.click(londonOption);
@@ -60,7 +58,6 @@ describe('CitySelector', () => {
 
   it('applies custom className', () => {
     render(<CitySelector {...defaultProps} className="custom-class" />);
-    // The outermost wrapper should have the class
     const wrapper = screen.getByRole('button').closest('div.relative.flex.flex-col');
     expect(wrapper).toHaveClass('custom-class');
   });

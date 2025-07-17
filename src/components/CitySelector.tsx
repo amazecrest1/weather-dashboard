@@ -34,12 +34,10 @@ const CitySelector: React.FC<CitySelectorProps> = ({
   const buttonRef = useRef<HTMLButtonElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Load custom cities on mount
   useEffect(() => {
     setCustomCities(getCustomCities());
   }, []);
 
-  // Handle search input changes
   useEffect(() => {
     if (searchQuery.trim().length >= 2) {
       debouncedSearchCities(searchQuery, (cities) => {
@@ -50,10 +48,8 @@ const CitySelector: React.FC<CitySelectorProps> = ({
     }
   }, [searchQuery]);
 
-  // All available cities (predefined + custom)
   const allCities = [ALL_CITIES_OPTION, ...CITIES, ...customCities];
 
-  // Filtered cities based on search query
   const filteredCities = searchQuery.length < 2 
     ? allCities 
     : allCities.filter(city => 
@@ -61,7 +57,6 @@ const CitySelector: React.FC<CitySelectorProps> = ({
         city.country.toLowerCase().includes(searchQuery.toLowerCase())
       );
 
-  // Combined suggestions (filtered existing cities + search results)
   const suggestions = [
     ...filteredCities,
     ...searchResults.filter(result => 
@@ -78,7 +73,6 @@ const CitySelector: React.FC<CitySelectorProps> = ({
   };
 
   const handleCitySelect = (city: City) => {
-    // Save custom city if it's not already saved
     if (city.isCustom && !customCities.some(c => c.id === city.id)) {
       saveCustomCity(city);
       setCustomCities(prev => [...prev, city]);
@@ -123,7 +117,6 @@ const CitySelector: React.FC<CitySelectorProps> = ({
     removeCustomCity(cityId);
     setCustomCities(prev => prev.filter(c => c.id !== cityId));
     
-    // If the removed city was selected, switch to default
     if (selectedCity.id === cityId) {
       onCityChange(ALL_CITIES_OPTION);
     }
@@ -132,10 +125,23 @@ const CitySelector: React.FC<CitySelectorProps> = ({
   const handleDropdownClick = () => {
     if (buttonRef.current) {
       const rect = buttonRef.current.getBoundingClientRect();
+      const viewportWidth = window.innerWidth;
+      
+      let left: number;
+      let width: number;
+      
+      if (viewportWidth < 640) {
+        left = window.scrollX + 8;
+        width = viewportWidth - 16;
+      } else {
+        left = rect.left + window.scrollX;
+        width = rect.width;
+      }
+      
       setDropdownPosition({
         top: rect.bottom + window.scrollY + 8,
-        left: rect.left + window.scrollX,
-        width: rect.width
+        left: left,
+        width: width
       });
     }
     setIsOpen(!isOpen);
@@ -154,7 +160,6 @@ const CitySelector: React.FC<CitySelectorProps> = ({
     }, 200);
   };
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (buttonRef.current && !buttonRef.current.contains(event.target as Node) &&
@@ -170,10 +175,12 @@ const CitySelector: React.FC<CitySelectorProps> = ({
     };
   }, []);
 
-  // Update display value
+  const isMobile = window.innerWidth < 640;
   const displayValue = selectedCity.id === 'all-cities'
     ? 'All Cities Selected'
-    : selectedCity.name + (selectedCity.state ? `, ${selectedCity.state}` : '') + `, ${selectedCity.country}`;
+    : isMobile
+      ? selectedCity.name + (selectedCity.state ? `, ${selectedCity.state}` : '')
+      : selectedCity.name + (selectedCity.state ? `, ${selectedCity.state}` : '') + `, ${selectedCity.country}`;
 
   return (
     <div className={`relative flex flex-col ${className}`} style={{ zIndex: 1000 }}>
@@ -181,12 +188,12 @@ const CitySelector: React.FC<CitySelectorProps> = ({
         <button
           ref={buttonRef}
           onClick={handleDropdownClick}
-          className={`w-full px-4 sm:px-6 py-3 border border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-emerald-200 bg-gradient-to-r from-emerald-500 to-teal-500 bg-clip-text text-transparent focus:outline-none focus:ring-2 focus:ring-emerald-500 dark:focus:ring-emerald-400 focus:border-emerald-500 dark:focus:border-emerald-400 text-left flex items-center justify-between shadow-lg dark:shadow-gray-900/50 hover:border-gray-300 dark:hover:border-gray-500 transition-all duration-200 font-medium text-sm sm:text-base backdrop-blur-sm`}
+          className={`w-full px-3 sm:px-4 md:px-6 py-3 border border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-emerald-200 bg-gradient-to-r from-emerald-500 to-teal-500 bg-clip-text text-transparent focus:outline-none focus:ring-2 focus:ring-emerald-500 dark:focus:ring-emerald-400 focus:border-emerald-500 dark:focus:border-emerald-400 text-left flex items-center justify-between shadow-lg dark:shadow-gray-900/50 hover:border-gray-300 dark:hover:border-gray-500 transition-all duration-200 font-medium text-xs sm:text-sm md:text-base backdrop-blur-sm`}
           style={{ minHeight: 56 }}
         >
-          <span className="truncate">{displayValue}</span>
+          <span className="truncate flex-1 min-w-0 text-left">{displayValue}</span>
           <span className="flex items-center justify-center ml-2 sm:ml-3 flex-shrink-0">
-            <svg className="w-5 h-5 sm:w-6 sm:h-6 text-gray-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-gray-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
             </svg>
           </span>
@@ -202,7 +209,7 @@ const CitySelector: React.FC<CitySelectorProps> = ({
             top: dropdownPosition.top,
             left: dropdownPosition.left,
             width: dropdownPosition.width,
-            minWidth: 260,
+            minWidth: window.innerWidth < 640 ? 'auto' : 260,
             zIndex: 999999,
             boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.10)',
             border: '1px solid #e5e7eb',

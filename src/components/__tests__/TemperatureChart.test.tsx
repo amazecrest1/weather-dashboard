@@ -4,7 +4,6 @@ import '@testing-library/jest-dom';
 import TemperatureChart from '../TemperatureChart';
 import { TemperatureChartData } from '../../types/weather';
 
-// Mock Recharts components
 jest.mock('recharts', () => ({
   LineChart: ({ children }: { children: React.ReactNode }) => <div data-testid="line-chart">{children}</div>,
   Line: ({ name }: { name: string }) => <div data-testid={`line-${name}`}>{name}</div>,
@@ -48,7 +47,6 @@ describe('TemperatureChart', () => {
 
   it('applies custom className', () => {
     render(<TemperatureChart data={mockData} className="custom-class" />);
-    // The outermost wrapper should have the class
     const wrapper = document.querySelector('.custom-class');
     expect(wrapper).toBeInTheDocument();
     expect(wrapper).toHaveClass('custom-class');

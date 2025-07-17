@@ -10,7 +10,6 @@ import MultiParameterChart from '../components/MultiParameterChart';
 import LoadingSpinner from '../components/LoadingSpinner';
 import ThemeToggle from '../components/ThemeToggle';
 
-// Helper functions for insights
 const calculateCorrelation = (data1: number[], data2: number[]): number => {
   if (data1.length !== data2.length || data1.length === 0) return 0;
   
@@ -222,7 +221,7 @@ const DetailedInsights = () => {
 
           {/* Chart */}
           {!loading && !error && (
-            <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 sm:p-6 mb-6 sm:mb-8 shadow-lg dark:shadow-gray-900/30 backdrop-blur-sm" style={{ zIndex: 1 }}>
+            <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 sm:p-6 mb-6 sm:mb-8 shadow-lg dark:shadow-gray-900/30 backdrop-blur-sm" style={{ zIndex: 1, minHeight: '500px' }}>
               <MultiParameterChart
                 data={chartData}
                 selectedParameters={selectedParameters}
@@ -241,7 +240,6 @@ const DetailedInsights = () => {
                   const param1Data = chartData.map(d => d[param1]).filter(v => typeof v === 'number') as number[];
                   const param2Data = chartData.map(d => d[param2]).filter(v => typeof v === 'number') as number[];
                   
-                  // Calculate insights
                   const param1Avg = param1Data.reduce((a, b) => a + b, 0) / param1Data.length;
                   const param2Avg = param2Data.reduce((a, b) => a + b, 0) / param2Data.length;
                   const param1Max = Math.max(...param1Data);
@@ -249,7 +247,6 @@ const DetailedInsights = () => {
                   const param1Min = Math.min(...param1Data);
                   const param2Min = Math.min(...param2Data);
                   
-                  // Calculate correlation
                   const correlation = calculateCorrelation(param1Data, param2Data);
                   
                   return (
