@@ -63,6 +63,80 @@
   z-index: 9999 !important;
 }
 
+/* Calendar dropdown positioning fixes */
+.date-range-picker-responsive {
+  position: relative !important;
+  overflow: visible !important;
+}
+
+/* Ensure calendar dropdown stays within viewport */
+.rdrDateRangeWrapper {
+  position: relative !important;
+  overflow: visible !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+}
+
+/* Force proper positioning for calendar elements */
+.rdrCalendarWrapper {
+  position: relative !important;
+  overflow: visible !important;
+}
+
+/* Ensure calendar doesn't overflow its container */
+.rdrMonth {
+  position: relative !important;
+  overflow: visible !important;
+  max-width: 100% !important;
+}
+
+/* Fix for calendar dropdown positioning */
+[data-portal="true"] {
+  position: fixed !important;
+  z-index: 999999 !important;
+  max-width: calc(100vw - 32px) !important;
+  max-height: calc(100vh - 32px) !important;
+  overflow: auto !important;
+  pointer-events: auto !important;
+  box-sizing: border-box !important;
+}
+
+/* Ensure action buttons are always visible */
+[data-portal="true"] .flex.justify-end {
+  position: relative !important;
+  z-index: 1000000 !important;
+  pointer-events: auto !important;
+  background: inherit !important;
+}
+
+/* Ensure the dropdown content doesn't get clipped */
+[data-portal="true"] > div {
+  overflow: visible !important;
+}
+
+/* Specific fix for action buttons visibility */
+[data-portal="true"] .flex.justify-end.items-center.p-3 {
+  position: sticky !important;
+  bottom: 0 !important;
+  background: inherit !important;
+  z-index: 1000001 !important;
+  pointer-events: auto !important;
+  border-top: 1px solid !important;
+  border-color: inherit !important;
+  min-height: 60px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+}
+
+/* Ensure action buttons are never hidden */
+[data-portal="true"] .flex.justify-end.items-center.p-3 button {
+  position: relative !important;
+  z-index: 1000002 !important;
+  pointer-events: auto !important;
+  cursor: pointer !important;
+}
+
 /* Fix persistent hover state in Recharts */
 .recharts-tooltip-wrapper {
   pointer-events: none !important;
@@ -110,10 +184,23 @@
   display: none !important;
 }
 
-/* Completely disable all Recharts cursor and tooltip elements */
-.recharts-tooltip-wrapper,
-.recharts-tooltip,
-.recharts-default-tooltip,
+/* Enable tooltips with proper hover behavior */
+.recharts-tooltip-wrapper {
+  pointer-events: auto !important;
+  display: block !important;
+}
+
+.recharts-tooltip {
+  pointer-events: auto !important;
+  display: block !important;
+}
+
+.recharts-default-tooltip {
+  pointer-events: auto !important;
+  display: block !important;
+}
+
+/* Only disable cursor lines */
 .recharts-cursor,
 .recharts-tooltip-cursor,
 .recharts-cursor-line,
@@ -126,17 +213,16 @@
   pointer-events: none !important;
 }
 
-/* Ensure no hover effects on chart elements */
+/* Enable hover effects on chart elements for tooltips */
 .recharts-line-curve,
 .recharts-line-dot,
 .recharts-line-segment {
-  pointer-events: none !important;
+  pointer-events: auto !important;
 }
 
-/* Force remove any persistent hover states */
+/* Allow transitions for smooth tooltip interactions */
 .recharts-wrapper * {
-  transition: none !important;
-  animation: none !important;
+  transition: all 0.2s ease !important;
 }
 
 /* Ensure chart container properly shows dark theme */
@@ -167,4 +253,288 @@
 /* Ensure chart background is properly set */
 .dark [class*="bg-gray-800"] {
   background-color: #1F2937 !important;
+}
+
+/* Dark theme styles for react-date-range */
+.dark .rdrDateRangeWrapper.rdrDateRangeWrapper,
+.dark .rdrCalendarWrapper,
+.dark .rdrMonth {
+  background-color: #23293a !important;
+  color: #F3F4F6 !important;
+  border-radius: 18px !important;
+  box-shadow: 0 8px 32px 0 rgba(0,0,0,0.25) !important;
+}
+
+.dark .rdrMonthName {
+  color: #e0e7ef !important;
+  font-weight: 600 !important;
+  font-size: 1.1rem !important;
+  letter-spacing: 0.01em !important;
+}
+
+.dark .rdrWeekDays {
+  background: transparent !important;
+  color: #a3aed6 !important;
+  font-weight: 500 !important;
+}
+
+.dark .rdrWeekDay {
+  color: #a3aed6 !important;
+  font-size: 0.95em !important;
+}
+
+.dark .rdrDays {
+  background: transparent !important;
+}
+
+.dark .rdrDay {
+  color: #FFFFFF !important;
+  font-size: 1.05em !important;
+  border-radius: 10px !important;
+  padding: 0.2em 0.1em !important;
+  transition: background 0.15s, color 0.15s !important;
+  font-weight: 500 !important;
+}
+
+/* Ensure valid dates are clearly visible */
+.dark .rdrDay:not(.rdrDayPassive):not(.rdrDayDisabled) {
+  color: #FFFFFF !important;
+  background: transparent !important;
+}
+
+/* Hover state for valid dates */
+.dark .rdrDay:not(.rdrDayPassive):not(.rdrDayDisabled):hover {
+  background: #4B5563 !important;
+  color: #FFFFFF !important;
+}
+
+/* Override the default selection styles */
+.dark .rdrDayInRange {
+  background: rgba(139, 92, 246, 0.18) !important;
+  color: #e0e7ef !important;
+}
+
+.dark .rdrDayStartOfRange,
+.dark .rdrDayEndOfRange {
+  background: #8B5CF6 !important;
+  color: #fff !important;
+  border-radius: 10px !important;
+}
+
+.dark .rdrDayToday {
+  background: transparent !important;
+}
+
+.dark .rdrDayToday .rdrDayNumber span {
+  border: 1.5px solid #8B5CF6 !important;
+  border-radius: 50% !important;
+  padding: 0.1em 0.45em !important;
+  color: #8B5CF6 !important;
+  background: #23293a !important;
+}
+
+.dark .rdrDayHovered:not(.rdrDayPassive):not(.rdrDayDisabled) {
+  background: #4B5563 !important;
+  color: #FFFFFF !important;
+}
+
+.dark .rdrDayPassive {
+  color: #6B7280 !important;
+  opacity: 0.6 !important;
+}
+
+.dark .rdrDayDisabled {
+  color: #374151 !important;
+  background: transparent !important;
+  opacity: 0.4 !important;
+}
+
+/* Ensure day numbers are clearly visible */
+.dark .rdrDayNumber {
+  color: inherit !important;
+  font-weight: 500 !important;
+}
+
+.dark .rdrDayNumber span {
+  color: inherit !important;
+  font-weight: 500 !important;
+}
+
+/* Better contrast for valid dates */
+.dark .rdrDay:not(.rdrDayPassive):not(.rdrDayDisabled) .rdrDayNumber {
+  color: #FFFFFF !important;
+  font-weight: 600 !important;
+}
+
+.dark .rdrDay:not(.rdrDayPassive):not(.rdrDayDisabled) .rdrDayNumber span {
+  color: #FFFFFF !important;
+  font-weight: 600 !important;
+}
+
+.dark .rdrMonthAndYearWrapper {
+  background: transparent !important;
+  color: #e0e7ef !important;
+  font-weight: 500 !important;
+}
+
+.dark .rdrMonthAndYearPickers,
+.dark .rdrMonthPicker,
+.dark .rdrYearPicker {
+  color: #e0e7ef !important;
+  background: #23293a !important;
+  border-radius: 8px !important;
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  z-index: 10 !important;
+}
+
+.dark .rdrMonthPicker select,
+.dark .rdrYearPicker select {
+  color: #e0e7ef !important;
+  background: #23293a !important;
+  border: 1px solid #374151 !important;
+  border-radius: 8px !important;
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  z-index: 10 !important;
+  padding: 4px 8px !important;
+}
+
+/* Ensure month/year pickers are clickable in light theme too */
+.rdrMonthAndYearPickers,
+.rdrMonthPicker,
+.rdrYearPicker {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  z-index: 10 !important;
+}
+
+.rdrMonthPicker select,
+.rdrYearPicker select {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  z-index: 10 !important;
+  padding: 4px 8px !important;
+}
+
+.dark .rdrNextPrevButton {
+  background: #23293a !important;
+  color: #8B5CF6 !important;
+  border-radius: 8px !important;
+  border: none !important;
+}
+
+.dark .rdrNextPrevButton:hover {
+  background: #2d3650 !important;
+}
+
+.dark .rdrDefinedRangesWrapper {
+  background: transparent !important;
+  border: none !important;
+}
+
+/* --- Quick Selection Buttons --- */
+.rdr-quick-btn {
+  border-radius: 999px !important;
+  background: #23293a !important;
+  color: #a3aed6 !important;
+  font-weight: 500 !important;
+  padding: 0.5em 1.2em !important;
+  margin-bottom: 0.3em !important;
+  margin-right: 0.5em !important;
+  border: none !important;
+  transition: background 0.15s, color 0.15s !important;
+  font-size: 0.98em !important;
+  outline: none !important;
+  cursor: pointer !important;
+}
+.rdr-quick-btn:hover, .rdr-quick-btn:focus {
+  background: #8B5CF6 !important;
+  color: #fff !important;
+}
+
+.dark .rdr-quick-btn {
+  background: #23293a !important;
+  color: #a3aed6 !important;
+}
+.dark .rdr-quick-btn:hover, .dark .rdr-quick-btn:focus {
+  background: #8B5CF6 !important;
+  color: #fff !important;
+}
+
+/* --- Action Buttons --- */
+.rdr-action-btn {
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  font-size: 1em !important;
+  padding: 0.5em 1.5em !important;
+  margin-left: 0.5em !important;
+  transition: background 0.15s, color 0.15s !important;
+  cursor: pointer !important;
+}
+
+/* Light theme action buttons */
+.rdr-action-btn.rdr-apply {
+  background: linear-gradient(90deg, #8B5CF6 0%, #6366F1 100%) !important;
+  color: #fff !important;
+  border: none !important;
+}
+
+.rdr-action-btn.rdr-apply:hover {
+  background: linear-gradient(90deg, #7C3AED 0%, #4F46E5 100%) !important;
+}
+
+.rdr-action-btn.rdr-cancel {
+  background: transparent !important;
+  color: #6B7280 !important;
+  border: none !important;
+}
+
+.rdr-action-btn.rdr-cancel:hover {
+  color: #374151 !important;
+  text-decoration: underline !important;
+}
+
+/* Dark theme action buttons */
+.dark .rdr-action-btn.rdr-apply {
+  background: linear-gradient(90deg, #8B5CF6 0%, #6366F1 100%) !important;
+  color: #fff !important;
+  border: none !important;
+}
+
+.dark .rdr-action-btn.rdr-apply:hover {
+  background: linear-gradient(90deg, #7C3AED 0%, #4F46E5 100%) !important;
+}
+
+.dark .rdr-action-btn.rdr-cancel {
+  background: transparent !important;
+  color: #a3aed6 !important;
+  border: none !important;
+}
+
+.dark .rdr-action-btn.rdr-cancel:hover {
+  color: #fff !important;
+  text-decoration: underline !important;
+}
+
+/* --- Divider for Quick Selection --- */
+.rdr-quick-divider {
+  border-bottom: 1px solid #374151 !important;
+  margin: 1em 0 !important;
+}
+
+/* Force override any inline styles */
+.dark .rdrDateRangeWrapper [style*="background"],
+.dark .rdrCalendarWrapper [style*="background"],
+.dark .rdrMonth [style*="background"] {
+  background-color: #23293a !important;
+}
+
+.dark .rdrDayInRange [style*="background"] {
+  background-color: rgba(139, 92, 246, 0.18) !important;
+}
+
+.dark .rdrDayStartOfRange [style*="background"],
+.dark .rdrDayEndOfRange [style*="background"] {
+  background-color: #8B5CF6 !important;
 } 

@@ -115,24 +115,24 @@ const DetailedInsights = () => {
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 transition-colors duration-200">
       {/* Top Bar */}
-      <div className="bg-gray-800 dark:bg-gray-950 text-white py-3 px-6 shadow-sm">
+      <div className="bg-gray-800 dark:bg-gray-950 text-white py-3 px-4 sm:px-6 shadow-sm">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
             <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
             </svg>
-            <span className="font-bold">Weather</span>
+            <span className="font-bold text-sm sm:text-base">Weather</span>
           </div>
-          <div className="flex items-center gap-4">
-            <div className="text-sm opacity-90">Detailed Insights</div>
+          <div className="flex items-center gap-2 sm:gap-4">
+            <div className="text-xs sm:text-sm opacity-90 hidden sm:block">Detailed Insights</div>
             <ThemeToggle />
           </div>
         </div>
       </div>
       
-      <div className="flex">
-        {/* Left Vertical Sidebar */}
-        <div className="w-16 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex flex-col items-center py-4">
+      <div className="flex flex-col lg:flex-row">
+        {/* Left Vertical Sidebar - Hidden on mobile, shown on desktop */}
+        <div className="hidden lg:flex w-16 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex-col items-center py-4">
           <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ backgroundColor: '#E6F7FA' }}>
             <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect x="8" y="14" width="3" height="8" rx="1.5" stroke="#00A7C4" strokeWidth="2" fill="none" />
@@ -144,37 +144,42 @@ const DetailedInsights = () => {
         </div>
 
         {/* Main Content */}
-        <div className="flex-1 p-8">
+        <div className="flex-1 p-4 sm:p-6 lg:p-8">
           {/* Detailed Insights Header */}
-          <div className="flex items-center justify-between mb-8">
-            <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">Detailed Insights</h1>
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 sm:mb-8">
+            <h1 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white">Detailed Insights</h1>
             <button 
               onClick={() => navigate('/')}
-              className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white px-3 py-1 rounded transition-colors text-sm font-medium"
+              className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white px-3 py-1 rounded transition-colors text-sm font-medium self-start sm:self-auto"
             >
               ← Back to Overview
             </button>
           </div>
 
           {/* Filters */}
-          <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 mb-8">
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Filters</h2>
-            <div className="flex items-center gap-6 mb-4">
-              <div className="flex-1 max-w-xs">
+          <div className="bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-800 dark:via-gray-800 dark:to-gray-800 border border-blue-100 dark:border-gray-600 rounded-xl p-4 sm:p-6 mb-6 sm:mb-8 shadow-lg dark:shadow-gray-900/30 backdrop-blur-sm" style={{ zIndex: 100 }}>
+            <h2 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
+              <svg className="w-5 h-5 mr-2 text-blue-500 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.207A1 1 0 013 6.5V4z" />
+              </svg>
+              Filters
+            </h2>
+            <div className="flex flex-col lg:flex-row items-stretch lg:items-center gap-4 lg:gap-6 mb-4">
+              <div className="flex-1 min-w-0">
                 <DateRangePicker
                   dateRange={dateRange}
                   onDateRangeChange={setDateRange}
                   className="w-full"
                 />
               </div>
-              <div className="flex-1 max-w-xs">
+              <div className="flex-1 min-w-0">
                 <CitySelector
                   selectedCity={selectedCity}
                   onCityChange={setSelectedCity}
                   className="w-full"
                 />
               </div>
-              <div className="flex-1 flex justify-end">
+              <div className="flex-1 min-w-0 lg:flex lg:justify-end">
                 <ParameterSelector
                   selectedParameters={selectedParameters}
                   onParametersChange={setSelectedParameters}
@@ -217,7 +222,7 @@ const DetailedInsights = () => {
 
           {/* Chart */}
           {!loading && !error && (
-            <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 mb-8">
+            <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 sm:p-6 mb-6 sm:mb-8 shadow-lg dark:shadow-gray-900/30 backdrop-blur-sm" style={{ zIndex: 1 }}>
               <MultiParameterChart
                 data={chartData}
                 selectedParameters={selectedParameters}
@@ -227,7 +232,7 @@ const DetailedInsights = () => {
 
           {/* Comparison Insights */}
           {!loading && !error && selectedParameters.length >= 1 && chartData.length > 0 && (
-            <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 mb-8">
+            <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 mb-8 shadow-lg dark:shadow-gray-900/30 backdrop-blur-sm">
               <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Comparison Insights</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {(() => {
@@ -249,7 +254,7 @@ const DetailedInsights = () => {
                   
                   return (
                     <>
-                      <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
+                      <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-xl border border-blue-200 dark:border-blue-700 shadow-sm">
                         <h3 className="font-medium text-blue-900 dark:text-blue-300 mb-2">Correlation Analysis</h3>
                         <div className="text-2xl font-bold text-blue-700 dark:text-blue-400">
                           {correlation > 0.7 ? 'Strong Positive' : 
@@ -262,20 +267,20 @@ const DetailedInsights = () => {
                         </p>
                       </div>
                       
-                      <div className="bg-green-50 dark:bg-green-900/20 p-4 rounded-lg">
+                      <div className="bg-green-50 dark:bg-green-900/20 p-4 rounded-xl border border-green-200 dark:border-green-700 shadow-sm">
                         <h3 className="font-medium text-green-900 dark:text-green-300 mb-2">Average Values</h3>
-                                                  <div className="space-y-1">
-                            <div className="flex justify-between">
-                              <span className="text-sm text-green-700 dark:text-green-400">{getParameterLabel(param1)}:</span>
-                              <span className="font-medium text-green-900 dark:text-green-300">{param1Avg.toFixed(1)} {getParameterUnit(param1)}</span>
-                            </div>
-                            {param2 && (
-                              <div className="flex justify-between">
-                                <span className="text-sm text-green-700 dark:text-green-400">{getParameterLabel(param2)}:</span>
-                                <span className="font-medium text-green-900 dark:text-green-300">{param2Avg.toFixed(1)} {getParameterUnit(param2)}</span>
-                              </div>
-                            )}
+                        <div className="space-y-1">
+                          <div className="flex justify-between">
+                            <span className="text-sm text-green-700 dark:text-green-400">{getParameterLabel(param1)}:</span>
+                            <span className="font-medium text-green-900 dark:text-green-300">{param1Avg.toFixed(1)} {getParameterUnit(param1)}</span>
                           </div>
+                          {param2 && (
+                            <div className="flex justify-between">
+                              <span className="text-sm text-green-700 dark:text-green-400">{getParameterLabel(param2)}:</span>
+                              <span className="font-medium text-green-900 dark:text-green-300">{param2Avg.toFixed(1)} {getParameterUnit(param2)}</span>
+                            </div>
+                          )}
+                        </div>
                       </div>
                       
                       <div className="bg-purple-50 p-4 rounded-lg">

@@ -11,22 +11,22 @@ interface WindSpeedChartProps {
 const WindSpeedChart: React.FC<WindSpeedChartProps> = ({ data, className = '', onClick }) => {
   return (
     <div className={className}>
-      <div className="flex items-center mb-4">
+      <div className="flex items-center mb-3 sm:mb-4">
         <div className="flex items-center">
-          <svg className="w-5 h-5 text-gray-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"/>
           </svg>
-          <h3 className="text-lg font-medium text-gray-900">
+          <h3 className="text-base sm:text-lg font-medium text-gray-900 dark:text-teal-200 bg-gradient-to-r from-teal-500 to-green-500 bg-clip-text text-transparent">
             Windspeed
           </h3>
         </div>
       </div>
-      <div style={{ width: '100%', height: '350px' }}>
+      <div style={{ width: '100%', height: '250px', minHeight: '200px' }}>
         <ResponsiveContainer>
-          <LineChart data={data} margin={{ top: 20, right: 30, left: 30, bottom: 30 }}>
+          <LineChart data={data} margin={{ top: 10, right: 20, left: 20, bottom: 20 }}>
             <XAxis 
               dataKey="date" 
-              tick={{ fontSize: 12 }}
+              tick={{ fontSize: 10 }}
               axisLine={false}
               tickLine={false}
               tickFormatter={(value) => {
@@ -38,14 +38,14 @@ const WindSpeedChart: React.FC<WindSpeedChartProps> = ({ data, className = '', o
               }}
             />
             <YAxis 
-              tick={{ fontSize: 12 }}
+              tick={{ fontSize: 10 }}
               axisLine={false}
               tickLine={false}
               label={{ 
                 value: 'Wind Speed (km/h)', 
                 angle: -90, 
                 position: 'insideLeft',
-                style: { textAnchor: 'middle' },
+                style: { textAnchor: 'middle', fontSize: 10 },
                 offset: -5
               }}
             />
@@ -66,7 +66,7 @@ const WindSpeedChart: React.FC<WindSpeedChartProps> = ({ data, className = '', o
                 borderRadius: '6px',
                 boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)'
               }}
-              cursor={{ stroke: '#D1D5DB', strokeWidth: 1, strokeDasharray: '3 3' }}
+              cursor={false}
               isAnimationActive={false}
               animationDuration={0}
             />

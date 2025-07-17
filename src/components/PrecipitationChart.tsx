@@ -11,22 +11,22 @@ interface PrecipitationChartProps {
 const PrecipitationChart: React.FC<PrecipitationChartProps> = ({ data, className = '', onClick }) => {
   return (
     <div className={className}>
-      <div className="flex items-center mb-4">
+      <div className="flex items-center mb-3 sm:mb-4">
         <div className="flex items-center">
-          <svg className="w-5 h-5 text-gray-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
           </svg>
-          <h3 className="text-lg font-medium text-gray-900">
+          <h3 className="text-base sm:text-lg font-medium text-gray-900 dark:text-blue-200 bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent">
             Precipitation
           </h3>
         </div>
       </div>
-      <div style={{ width: '100%', height: '350px' }}>
+      <div style={{ width: '100%', height: '250px', minHeight: '200px' }}>
         <ResponsiveContainer>
-          <BarChart data={data} margin={{ top: 20, right: 30, left: 30, bottom: 30 }}>
+          <BarChart data={data} margin={{ top: 10, right: 20, left: 20, bottom: 20 }}>
             <XAxis 
               dataKey="date" 
-              tick={{ fontSize: 12 }}
+              tick={{ fontSize: 10 }}
               axisLine={false}
               tickLine={false}
               tickFormatter={(value) => {
@@ -38,14 +38,14 @@ const PrecipitationChart: React.FC<PrecipitationChartProps> = ({ data, className
               }}
             />
             <YAxis 
-              tick={{ fontSize: 12 }}
+              tick={{ fontSize: 10 }}
               axisLine={false}
               tickLine={false}
               label={{ 
                 value: 'Precipitation (mm)', 
                 angle: -90, 
                 position: 'insideLeft',
-                style: { textAnchor: 'middle' },
+                style: { textAnchor: 'middle', fontSize: 10 },
                 offset: -5
               }}
             />
@@ -64,7 +64,7 @@ const PrecipitationChart: React.FC<PrecipitationChartProps> = ({ data, className
                 borderRadius: '6px',
                 boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)'
               }}
-              cursor={{ stroke: '#D1D5DB', strokeWidth: 1, strokeDasharray: '3 3' }}
+              cursor={false}
               isAnimationActive={false}
               animationDuration={0}
             />

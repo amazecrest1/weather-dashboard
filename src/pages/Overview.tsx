@@ -81,24 +81,24 @@ const Overview = () => {
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 transition-colors duration-200">
       {/* Top Bar */}
-      <div className="bg-gray-800 dark:bg-gray-950 text-white py-3 px-6 shadow-sm">
+      <div className="bg-gray-800 dark:bg-gray-950 text-white py-3 px-4 sm:px-6 shadow-sm">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
             <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
             </svg>
-            <span className="font-bold">Weather</span>
+            <span className="font-bold text-sm sm:text-base">Weather</span>
           </div>
-          <div className="flex items-center gap-4">
-            <div className="text-sm opacity-90">Overview</div>
+          <div className="flex items-center gap-2 sm:gap-4">
+            <div className="text-xs sm:text-sm opacity-90 hidden sm:block">Overview</div>
             <ThemeToggle />
           </div>
         </div>
       </div>
       
-      <div className="flex">
-        {/* Left Vertical Sidebar */}
-        <div className="w-16 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex flex-col items-center py-4">
+      <div className="flex flex-col lg:flex-row">
+        {/* Left Vertical Sidebar - Hidden on mobile, shown on desktop */}
+        <div className="hidden lg:flex w-16 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex-col items-center py-4">
           <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ backgroundColor: '#E6F7FA' }}>
             <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect x="8" y="14" width="3" height="8" rx="1.5" stroke="#00A7C4" strokeWidth="2" fill="none" />
@@ -110,29 +110,13 @@ const Overview = () => {
         </div>
 
         {/* Main Content */}
-        <div className="flex-1 p-8">
+        <div className="flex-1 p-4 sm:p-6 lg:p-8">
           {/* Overview Header */}
-          <div className="flex items-center mb-8">
-            <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">Overview</h1>
+          <div className="flex items-center mb-6 sm:mb-8">
+            <h1 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-blue-100 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Overview</h1>
           </div>
           
-          {/* Filters Row - Simple Horizontal Layout */}
-          <div className="flex items-center gap-6 mb-8">
-            <div className="flex-1 max-w-xs">
-              <DateRangePicker
-                dateRange={dateRange}
-                onDateRangeChange={setDateRange}
-                className="w-full"
-              />
-            </div>
-            <div className="flex-1 max-w-xs">
-              <CitySelector
-                selectedCity={selectedCity}
-                onCityChange={setSelectedCity}
-                className="w-full"
-              />
-            </div>
-          </div>
+
 
           {/* Loading State */}
           {loading && (
@@ -166,38 +150,59 @@ const Overview = () => {
             </div>
           )}
 
-          {/* Charts Grid - 2x2 Layout with Empty Cell */}
+          {/* Charts Grid with Filters at Top */}
           {!loading && !error && weatherData && (
-            <div className="grid grid-cols-2 gap-6">
-              {/* Temperature Chart - Top Left */}
-              <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 cursor-pointer hover:shadow-md transition-shadow" onClick={handleTemperatureChartClick}>
-                <TemperatureChart 
-                  data={temperatureData} 
-                  onClick={handleTemperatureChartClick}
-                />
+            <div className="space-y-4 sm:space-y-6">
+              {/* Filters Row - Left Half */}
+              <div className="flex flex-row items-center gap-4 mb-6 sm:mb-8 w-1/2">
+                <div className="flex-1 min-w-0">
+                  <DateRangePicker
+                    dateRange={dateRange}
+                    onDateRangeChange={setDateRange}
+                    className="w-full"
+                  />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <CitySelector
+                    selectedCity={selectedCity}
+                    onCityChange={setSelectedCity}
+                    className="w-full"
+                  />
+                </div>
               </div>
 
-              {/* Precipitation Chart - Top Right */}
-              <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 cursor-pointer hover:shadow-md transition-shadow" onClick={handlePrecipitationChartClick}>
-                <PrecipitationChart 
-                  data={precipitationData} 
-                  onClick={handlePrecipitationChartClick}
-                />
-              </div>
+              {/* Charts Grid - 2x2 Layout */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+                {/* Temperature Chart */}
+                <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 sm:p-6 cursor-pointer hover:shadow-xl dark:hover:shadow-gray-900/50 transition-all duration-300 hover:scale-[1.02] backdrop-blur-sm" onClick={handleTemperatureChartClick}>
+                  <TemperatureChart 
+                    data={temperatureData} 
+                    onClick={handleTemperatureChartClick}
+                  />
+                </div>
 
-              {/* Wind Speed Chart - Bottom Left */}
-              <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 cursor-pointer hover:shadow-md transition-shadow" onClick={handleWindSpeedChartClick}>
-                <WindSpeedChart 
-                  data={windSpeedData} 
-                  onClick={handleWindSpeedChartClick}
-                />
-              </div>
+                {/* Precipitation Chart */}
+                <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 sm:p-6 cursor-pointer hover:shadow-xl dark:hover:shadow-gray-900/50 transition-all duration-300 hover:scale-[1.02] backdrop-blur-sm" onClick={handlePrecipitationChartClick}>
+                  <PrecipitationChart 
+                    data={precipitationData} 
+                    onClick={handlePrecipitationChartClick}
+                  />
+                </div>
 
-              {/* Empty Cell - Bottom Right */}
-              <div className="bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg p-6 flex items-center justify-center">
-                <div className="text-gray-400 dark:text-gray-500 text-center">
-                  <div className="text-lg font-medium">Additional Chart</div>
-                  <div className="text-sm">Coming Soon</div>
+                {/* Wind Speed Chart */}
+                <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 sm:p-6 cursor-pointer hover:shadow-xl dark:hover:shadow-gray-900/50 transition-all duration-300 hover:scale-[1.02] backdrop-blur-sm" onClick={handleWindSpeedChartClick}>
+                  <WindSpeedChart 
+                    data={windSpeedData} 
+                    onClick={handleWindSpeedChartClick}
+                  />
+                </div>
+
+                {/* Empty Cell - Always shown in 2x2 grid */}
+                <div className="bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg p-4 sm:p-6 flex items-center justify-center">
+                  <div className="text-gray-400 dark:text-gray-500 text-center">
+                    <div className="text-base sm:text-lg font-medium">Additional Chart</div>
+                    <div className="text-xs sm:text-sm">Coming Soon</div>
+                  </div>
                 </div>
               </div>
             </div>

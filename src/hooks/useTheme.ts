@@ -29,7 +29,15 @@ export const useTheme = () => {
   // Initialize theme based on browser preference
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme') as Theme;
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    // Check if we're in a test environment or if matchMedia is not available
+    let prefersDark = false;
+    try {
+      prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    } catch (error) {
+      // In test environment or when matchMedia is not available, default to light
+      prefersDark = false;
+    }
     
     let initialTheme: Theme;
     if (savedTheme) {
@@ -55,6 +63,11 @@ export const useTheme = () => {
 
   // Listen for system theme changes
   useEffect(() => {
+    // Check if we're in a test environment or if matchMedia is not available
+    if (!window.matchMedia) {
+      return;
+    }
+    
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     
     const handleChange = (e: MediaQueryListEvent) => {

@@ -62,55 +62,61 @@ const MultiParameterChart = ({
   };
 
   return (
-    <div className={`card p-6 ${className}`}>
-      <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+    <div className={`card p-2 sm:p-6 ${className}`}>
+      <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white mb-2 sm:mb-4 flex items-center">
+        <svg className="w-5 h-5 mr-2 text-blue-500 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+        </svg>
         Hourly Weather Parameters
       </h3>
       <div 
         ref={chartRef}
-        className={`rounded-lg p-4 relative ${
+        className={`rounded-xl p-1 sm:p-4 relative ${
           theme === 'dark' 
-            ? 'bg-gray-800 border border-gray-700' 
-            : 'bg-white border border-gray-200'
+            ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 border border-gray-600 shadow-xl shadow-gray-900/50 backdrop-blur-sm' 
+            : 'bg-gradient-to-br from-white via-gray-50 to-white border border-gray-200 shadow-lg backdrop-blur-sm'
         }`}
+        style={{ minHeight: '250px', height: '250px' }}
       >
-        <ResponsiveContainer width="100%" height={400}>
+        <ResponsiveContainer width="100%" height="100%">
         <LineChart 
           data={data}
-          margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
+          margin={{ top: 10, right: 15, left: 10, bottom: 50 }}
           key={`chart-${selectedParameters.join('-')}-${data.length}`}
           onMouseMove={handleChartMouseMove}
           onMouseLeave={() => setHoveredPoint(null)}
         >
           <CartesianGrid 
             strokeDasharray="3 3" 
-            stroke={theme === 'dark' ? '#4B5563' : '#E5E7EB'} 
+            stroke={theme === 'dark' ? '#374151' : '#E5E7EB'} 
+            strokeOpacity={theme === 'dark' ? 0.3 : 0.5}
           />
           <XAxis 
             dataKey="time" 
             tick={{ 
-              fontSize: 12, 
-              fill: theme === 'dark' ? '#9CA3AF' : '#6B7280' 
+              fontSize: window.innerWidth < 768 ? 7 : 12, 
+              fill: theme === 'dark' ? '#D1D5DB' : '#6B7280' 
             }}
-            angle={-45}
+            angle={window.innerWidth < 768 ? -90 : -45}
             textAnchor="end"
-            height={80}
+            height={window.innerWidth < 768 ? 35 : 60}
             interval="preserveStartEnd"
-            stroke={theme === 'dark' ? '#6B7280' : '#D1D5DB'}
+            stroke={theme === 'dark' ? '#4B5563' : '#D1D5DB'}
           />
           <YAxis 
             yAxisId="left"
             orientation="left"
             tick={{ 
-              fontSize: 12, 
-              fill: theme === 'dark' ? '#9CA3AF' : '#6B7280' 
+              fontSize: window.innerWidth < 768 ? 8 : 12, 
+              fill: theme === 'dark' ? '#D1D5DB' : '#6B7280' 
             }}
-            stroke={theme === 'dark' ? '#6B7280' : '#D1D5DB'}
+            stroke={theme === 'dark' ? '#4B5563' : '#D1D5DB'}
             label={{ 
               value: param1 ? `${param1.label} (${param1.unit})` : '', 
               angle: -90, 
               position: 'insideLeft',
-              fill: theme === 'dark' ? '#9CA3AF' : '#6B7280'
+              fill: theme === 'dark' ? '#E5E7EB' : '#6B7280',
+              fontSize: window.innerWidth < 768 ? 8 : 12
             }}
           />
           {useRightAxis && (
@@ -118,7 +124,7 @@ const MultiParameterChart = ({
               yAxisId="right"
               orientation="right"
               tick={{ 
-                fontSize: 12, 
+                fontSize: window.innerWidth < 768 ? 8 : 12, 
                 fill: theme === 'dark' ? '#9CA3AF' : '#6B7280' 
               }}
               stroke={theme === 'dark' ? '#6B7280' : '#D1D5DB'}
@@ -126,14 +132,20 @@ const MultiParameterChart = ({
                 value: param2 ? `${param2.label} (${param2.unit})` : '', 
                 angle: 90, 
                 position: 'insideRight',
-                fill: theme === 'dark' ? '#9CA3AF' : '#6B7280'
+                fill: theme === 'dark' ? '#9CA3AF' : '#6B7280',
+                fontSize: window.innerWidth < 768 ? 8 : 12
               }}
             />
           )}
           <Legend 
             wrapperStyle={{
-              color: theme === 'dark' ? '#F9FAFB' : '#111827'
+              color: theme === 'dark' ? '#F9FAFB' : '#111827',
+              fontSize: window.innerWidth < 768 ? '9px' : '12px',
+              paddingTop: '10px',
+              marginBottom: '2px'
             }}
+            verticalAlign="bottom"
+            align="center"
           />
           {selectedParameters.map((paramKey, index) => {
             const config = getParameterConfig(paramKey);
@@ -167,16 +179,18 @@ const MultiParameterChart = ({
               position: 'absolute',
               left: hoveredPoint.x + 10,
               top: hoveredPoint.y - 40,
-              backgroundColor: theme === 'dark' ? '#1F2937' : '#FFFFFF',
+              backgroundColor: theme === 'dark' ? '#111827' : '#FFFFFF',
               border: theme === 'dark' ? '1px solid #374151' : '1px solid #E5E7EB',
-              borderRadius: '6px',
-              padding: '8px 12px',
+              borderRadius: '12px',
+              padding: '12px 16px',
               color: theme === 'dark' ? '#F9FAFB' : '#111827',
-              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+              boxShadow: theme === 'dark' ? '0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.2)' : '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
               fontSize: '12px',
-              zIndex: 1000,
+              zIndex: 10,
               pointerEvents: 'none',
-              maxWidth: '200px'
+              maxWidth: '200px',
+              backdropFilter: theme === 'dark' ? 'blur(12px)' : 'blur(8px)',
+              borderWidth: '2px'
             }}
           >
             <div style={{ margin: '0 0 4px 0', fontWeight: 'bold' }}>
@@ -196,7 +210,7 @@ const MultiParameterChart = ({
         )}
         
         {selectedParameters.length === 0 && (
-          <div className="flex items-center justify-center h-64 text-gray-500 dark:text-gray-400">
+          <div className="flex items-center justify-center h-full text-gray-500 dark:text-gray-400">
             Please select at least one parameter to display the chart
           </div>
         )}

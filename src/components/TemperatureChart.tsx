@@ -11,23 +11,23 @@ interface TemperatureChartProps {
 const TemperatureChart: React.FC<TemperatureChartProps> = ({ data, className = '', onClick }) => {
   return (
     <div className={className}>
-      <div className="flex items-center mb-4">
+      <div className="flex items-center mb-3 sm:mb-4">
         <div className="flex items-center">
           {/* Thermometer icon */}
-          <svg className="w-5 h-5 text-gray-600 mr-2" fill="currentColor" viewBox="0 0 24 24">
+          <svg className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 mr-2" fill="currentColor" viewBox="0 0 24 24">
             <path d="M12 2C10.34 2 9 3.34 9 5v6.5c-1.21.91-2 2.37-2 3.5a5 5 0 0 0 10 0c0-1.13-.79-2.59-2-3.5V5c0-1.66-1.34-3-3-3zm-1 3h2v2h-2V5zm0 3h2v2h-2V8zm0 3h2v2h-2v-2z"/>
           </svg>
-          <h3 className="text-lg font-medium text-gray-900">
+          <h3 className="text-base sm:text-lg font-medium text-gray-900 dark:text-orange-200 bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">
             Temperature
           </h3>
         </div>
       </div>
-      <div style={{ width: '100%', height: '350px' }}>
+      <div style={{ width: '100%', height: '250px', minHeight: '200px' }}>
         <ResponsiveContainer>
-          <LineChart data={data} margin={{ top: 20, right: 30, left: 30, bottom: 30 }}>
+          <LineChart data={data} margin={{ top: 10, right: 20, left: 20, bottom: 20 }}>
             <XAxis 
               dataKey="date" 
-              tick={{ fontSize: 12 }}
+              tick={{ fontSize: 10 }}
               axisLine={false}
               tickLine={false}
               tickFormatter={(value) => {
@@ -39,14 +39,14 @@ const TemperatureChart: React.FC<TemperatureChartProps> = ({ data, className = '
               }}
             />
             <YAxis 
-              tick={{ fontSize: 12 }}
+              tick={{ fontSize: 10 }}
               axisLine={false}
               tickLine={false}
               label={{ 
                 value: 'Temperature (°C)', 
                 angle: -90, 
                 position: 'insideLeft',
-                style: { textAnchor: 'middle' },
+                style: { textAnchor: 'middle', fontSize: 10 },
                 offset: -5
               }}
             />
@@ -70,7 +70,7 @@ const TemperatureChart: React.FC<TemperatureChartProps> = ({ data, className = '
                 borderRadius: '6px',
                 boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)'
               }}
-              cursor={{ stroke: '#D1D5DB', strokeWidth: 1, strokeDasharray: '3 3' }}
+              cursor={false}
               isAnimationActive={false}
               animationDuration={0}
             />

@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { HOURLY_PARAMETERS } from '../constants/cities';
 
 interface ParameterSelectorProps {
@@ -8,12 +9,15 @@ interface ParameterSelectorProps {
 
 const ParameterSelector: React.FC<ParameterSelectorProps> = ({ selectedParameters, onParametersChange }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0, width: 0 });
+  const buttonRef = useRef<HTMLButtonElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (buttonRef.current && !buttonRef.current.contains(event.target as Node) &&
+          dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setIsOpen(false);
       }
     };
@@ -30,6 +34,18 @@ const ParameterSelector: React.FC<ParameterSelectorProps> = ({ selectedParameter
     }
   };
 
+  const handleToggleDropdown = () => {
+    if (buttonRef.current) {
+      const rect = buttonRef.current.getBoundingClientRect();
+      setDropdownPosition({
+        top: rect.bottom + window.scrollY + 8,
+        left: rect.left + window.scrollX,
+        width: rect.width
+      });
+    }
+    setIsOpen(!isOpen);
+  };
+
   const handleRemove = (paramValue: string, e: React.MouseEvent) => {
     e.stopPropagation();
     onParametersChange(selectedParameters.filter((p) => p !== paramValue));
@@ -40,10 +56,11 @@ const ParameterSelector: React.FC<ParameterSelectorProps> = ({ selectedParameter
     : '';
 
   return (
-    <div className="relative w-full" ref={dropdownRef}>
+    <div className="relative w-full" ref={dropdownRef} style={{ zIndex: 99999 }}>
       <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="w-full px-6 py-3 border border-gray-200 rounded-xl bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-left flex items-center justify-between shadow-lg hover:border-gray-300 transition-colors font-medium min-h-[56px]"
+        ref={buttonRef}
+        onClick={handleToggleDropdown}
+        className="w-full px-4 sm:px-6 py-3 border border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-blue-500 dark:focus:border-blue-400 text-left flex items-center justify-between shadow-lg dark:shadow-gray-900/50 hover:border-gray-300 dark:hover:border-gray-500 transition-all duration-200 font-medium text-sm sm:text-base min-h-[56px] backdrop-blur-sm"
         type="button"
       >
         <div className="flex flex-wrap gap-2 items-center min-h-[24px]">
@@ -55,7 +72,7 @@ const ParameterSelector: React.FC<ParameterSelectorProps> = ({ selectedParameter
             return (
               <span
                 key={param}
-                className="inline-flex items-center px-3 py-1 rounded-full bg-blue-50 text-blue-700 font-medium text-sm shadow-sm border border-blue-200"
+                className="inline-flex items-center px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 font-medium text-sm shadow-sm border border-blue-200 dark:border-blue-700"
               >
                 {paramObj?.label || param}
                 <button
@@ -78,8 +95,17 @@ const ParameterSelector: React.FC<ParameterSelectorProps> = ({ selectedParameter
           </svg>
         </span>
       </button>
-      {isOpen && (
-        <div className="absolute z-50 w-full mt-2 bg-white border border-gray-200 rounded-xl shadow-lg max-h-60 overflow-y-auto">
+      {isOpen && createPortal(
+        <div 
+          ref={dropdownRef}
+          className="fixed bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-xl shadow-lg dark:shadow-gray-900/50 max-h-60 overflow-y-auto backdrop-blur-sm"
+          style={{ 
+            top: dropdownPosition.top,
+            left: dropdownPosition.left,
+            width: dropdownPosition.width,
+            zIndex: 999999
+          }}
+        >
           <div className="py-2">
             {HOURLY_PARAMETERS.map((param) => {
               const isSelected = selectedParameters.includes(param.key);
@@ -90,10 +116,10 @@ const ParameterSelector: React.FC<ParameterSelectorProps> = ({ selectedParameter
                   onClick={() => !isDisabled && handleSelect(param.key)}
                   className={`px-4 py-3 cursor-pointer transition-colors flex items-center justify-between ${
                     isSelected
-                      ? 'bg-blue-50 text-blue-900 border-r-2 border-blue-500' 
+                      ? 'bg-blue-50 dark:bg-blue-900/30 text-blue-900 dark:text-blue-100 border-r-2 border-blue-500 dark:border-blue-400' 
                       : isDisabled
-                        ? 'text-gray-300 cursor-not-allowed'
-                        : 'hover:bg-gray-50 text-gray-900'
+                        ? 'text-gray-300 dark:text-gray-600 cursor-not-allowed'
+                        : 'hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-900 dark:text-white'
                   }`}
                   style={{ opacity: isDisabled ? 0.5 : 1 }}
                 >
@@ -107,7 +133,8 @@ const ParameterSelector: React.FC<ParameterSelectorProps> = ({ selectedParameter
               );
             })}
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );
