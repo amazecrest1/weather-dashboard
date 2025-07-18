@@ -11,8 +11,38 @@ const notifyThemeListeners = (newTheme: Theme) => {
   globalThemeListeners.forEach(listener => listener(newTheme));
 };
 
+// Initialize global theme from localStorage on module load
+const initializeGlobalTheme = () => {
+  const savedTheme = localStorage.getItem('theme') as Theme;
+  if (savedTheme && (savedTheme === 'light' || savedTheme === 'dark')) {
+    globalTheme = savedTheme;
+  } else {
+    // Check system preference if no saved theme
+    try {
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      globalTheme = prefersDark ? 'dark' : 'light';
+    } catch (error) {
+      globalTheme = 'light';
+    }
+  }
+};
+
+// Initialize theme immediately
+initializeGlobalTheme();
+
 export const useTheme = () => {
-  const [theme, setTheme] = useState<Theme>(globalTheme);
+  // Check if theme is already applied to document and use that as initial state
+  const getInitialTheme = (): Theme => {
+    const root = window.document.documentElement;
+    if (root.classList.contains('dark')) {
+      return 'dark';
+    } else if (root.classList.contains('light')) {
+      return 'light';
+    }
+    return globalTheme;
+  };
+
+  const [theme, setTheme] = useState<Theme>(getInitialTheme);
 
   // Listen for theme changes from other components
   useEffect(() => {
@@ -26,32 +56,6 @@ export const useTheme = () => {
     };
   }, []);
 
-  // Initialize theme based on browser preference
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') as Theme;
-    
-    // Check if we're in a test environment or if matchMedia is not available
-    let prefersDark = false;
-    try {
-      prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    } catch (error) {
-      // In test environment or when matchMedia is not available, default to light
-      prefersDark = false;
-    }
-    
-    let initialTheme: Theme;
-    if (savedTheme) {
-      initialTheme = savedTheme;
-    } else {
-      initialTheme = prefersDark ? 'dark' : 'light';
-    }
-    
-    if (globalTheme === 'light' && initialTheme !== 'light') {
-      setTheme(initialTheme);
-      notifyThemeListeners(initialTheme);
-    }
-  }, []);
-
   // Apply theme to document
   useEffect(() => {
     const root = window.document.documentElement;
@@ -63,7 +67,6 @@ export const useTheme = () => {
 
   // Listen for system theme changes
   useEffect(() => {
-    
     if (!window.matchMedia) {
       return;
     }

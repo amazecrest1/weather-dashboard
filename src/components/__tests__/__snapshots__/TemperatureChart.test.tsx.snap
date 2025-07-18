@@ -11,7 +11,7 @@ exports[`TemperatureChart matches snapshot with custom className 1`] = `
       class="flex items-center"
     >
       <svg
-        class="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 mr-2"
+        class="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 dark:text-gray-400 mr-2"
         fill="currentColor"
         viewBox="0 0 24 24"
       >
@@ -87,7 +87,7 @@ exports[`TemperatureChart matches snapshot with data 1`] = `
       class="flex items-center"
     >
       <svg
-        class="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 mr-2"
+        class="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 dark:text-gray-400 mr-2"
         fill="currentColor"
         viewBox="0 0 24 24"
       >
@@ -163,7 +163,7 @@ exports[`TemperatureChart matches snapshot with empty data 1`] = `
       class="flex items-center"
     >
       <svg
-        class="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 mr-2"
+        class="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 dark:text-gray-400 mr-2"
         fill="currentColor"
         viewBox="0 0 24 24"
       >

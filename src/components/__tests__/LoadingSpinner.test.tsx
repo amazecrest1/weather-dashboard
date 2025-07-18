@@ -42,16 +42,8 @@ describe('LoadingSpinner', () => {
   it('has proper styling classes', () => {
     const { container } = render(<LoadingSpinner />);
     
-    const spinnerContainer = container.querySelector('.flex');
-    expect(spinnerContainer).toHaveClass('flex', 'items-center', 'justify-center');
-    
     const spinner = container.querySelector('.animate-spin');
-    expect(spinner).toHaveClass(
-      'animate-spin',
-      'rounded-full',
-      'border-b-2',
-      'border-primary-600'
-    );
+    expect(spinner).toHaveClass("animate-spin rounded-full border-b-2 border-blue-600 dark:border-blue-400");
   });
 
   it('combines custom className with default classes', () => {

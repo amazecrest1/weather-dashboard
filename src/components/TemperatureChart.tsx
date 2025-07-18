@@ -14,7 +14,7 @@ const TemperatureChart: React.FC<TemperatureChartProps> = ({ data, className = '
       <div className="flex items-center mb-3 sm:mb-4">
         <div className="flex items-center">
           {/* Thermometer icon */}
-          <svg className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 mr-2" fill="currentColor" viewBox="0 0 24 24">
+          <svg className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 dark:text-gray-400 mr-2" fill="currentColor" viewBox="0 0 24 24">
             <path d="M12 2C10.34 2 9 3.34 9 5v6.5c-1.21.91-2 2.37-2 3.5a5 5 0 0 0 10 0c0-1.13-.79-2.59-2-3.5V5c0-1.66-1.34-3-3-3zm-1 3h2v2h-2V5zm0 3h2v2h-2V8zm0 3h2v2h-2v-2z"/>
           </svg>
           <h3 className="text-base sm:text-lg font-medium text-gray-900 dark:text-orange-200 bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">
@@ -65,10 +65,11 @@ const TemperatureChart: React.FC<TemperatureChartProps> = ({ data, className = '
                 });
               }}
               contentStyle={{
-                backgroundColor: 'rgba(255, 255, 255, 0.95)',
-                border: '1px solid #e5e7eb',
+                backgroundColor: 'var(--tooltip-bg, rgba(255, 255, 255, 0.95))',
+                border: 'var(--tooltip-border, 1px solid #e5e7eb)',
                 borderRadius: '6px',
-                boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)'
+                boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
+                color: 'var(--tooltip-text, #374151)'
               }}
               cursor={false}
               isAnimationActive={false}

@@ -251,7 +251,7 @@ const DetailedInsights = () => {
                   
                   return (
                     <>
-                      <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-xl border border-blue-200 dark:border-blue-700 shadow-sm">
+                      <div className="bg-blue-50 dark:bg-blue-900/30 p-4 rounded-xl border border-blue-200 dark:border-blue-700 shadow-sm">
                         <h3 className="font-medium text-blue-900 dark:text-blue-300 mb-2">Correlation Analysis</h3>
                         <div className="text-2xl font-bold text-blue-700 dark:text-blue-400">
                           {correlation > 0.7 ? 'Strong Positive' : 
@@ -264,7 +264,7 @@ const DetailedInsights = () => {
                         </p>
                       </div>
                       
-                      <div className="bg-green-50 dark:bg-green-900/20 p-4 rounded-xl border border-green-200 dark:border-green-700 shadow-sm">
+                      <div className="bg-green-50 dark:bg-green-900/30 p-4 rounded-xl border border-green-200 dark:border-green-700 shadow-sm">
                         <h3 className="font-medium text-green-900 dark:text-green-300 mb-2">Average Values</h3>
                         <div className="space-y-1">
                           <div className="flex justify-between">
@@ -280,23 +280,23 @@ const DetailedInsights = () => {
                         </div>
                       </div>
                       
-                      <div className="bg-purple-50 p-4 rounded-lg">
-                        <h3 className="font-medium text-purple-900 mb-2">Peak Values</h3>
+                      <div className="bg-purple-50 dark:bg-purple-900/30 p-4 rounded-xl border border-purple-200 dark:border-purple-700 shadow-sm">
+                        <h3 className="font-medium text-purple-900 dark:text-purple-300 mb-2">Peak Values</h3>
                         <div className="space-y-1">
                           <div className="flex justify-between">
-                            <span className="text-sm text-purple-700">{getParameterLabel(param1)} Max:</span>
-                            <span className="font-medium text-purple-900">{param1Max.toFixed(1)} {getParameterUnit(param1)}</span>
+                            <span className="text-sm text-purple-700 dark:text-purple-400">{getParameterLabel(param1)} Max:</span>
+                            <span className="font-medium text-purple-900 dark:text-purple-300">{param1Max.toFixed(1)} {getParameterUnit(param1)}</span>
                           </div>
                           <div className="flex justify-between">
-                            <span className="text-sm text-purple-700">{getParameterLabel(param2)} Max:</span>
-                            <span className="font-medium text-purple-900">{param2Max.toFixed(1)} {getParameterUnit(param2)}</span>
+                            <span className="text-sm text-purple-700 dark:text-purple-400">{getParameterLabel(param2)} Max:</span>
+                            <span className="font-medium text-purple-900 dark:text-purple-300">{param2Max.toFixed(1)} {getParameterUnit(param2)}</span>
                           </div>
                         </div>
                       </div>
                       
-                      <div className="bg-orange-50 p-4 rounded-lg">
-                        <h3 className="font-medium text-orange-900 mb-2">Key Insights</h3>
-                        <ul className="text-sm text-orange-700 space-y-1">
+                      <div className="bg-orange-50 dark:bg-orange-900/30 p-4 rounded-xl border border-orange-200 dark:border-orange-700 shadow-sm">
+                        <h3 className="font-medium text-orange-900 dark:text-orange-300 mb-2">Key Insights</h3>
+                        <ul className="text-sm text-orange-700 dark:text-orange-400 space-y-1">
                           {correlation > 0.5 && (
                             <li>• {getParameterLabel(param1)} and {getParameterLabel(param2)} tend to increase together</li>
                           )}
@@ -315,23 +315,23 @@ const DetailedInsights = () => {
                         </ul>
                       </div>
                       
-                      <div className="bg-red-50 p-4 rounded-lg">
-                        <h3 className="font-medium text-red-900 mb-2">Data Range</h3>
+                      <div className="bg-red-50 dark:bg-red-900/30 p-4 rounded-xl border border-red-200 dark:border-red-700 shadow-sm">
+                        <h3 className="font-medium text-red-900 dark:text-red-300 mb-2">Data Range</h3>
                         <div className="space-y-1">
                           <div className="flex justify-between">
-                            <span className="text-sm text-red-700">{getParameterLabel(param1)}:</span>
-                            <span className="font-medium text-red-900">{param1Min.toFixed(1)} - {param1Max.toFixed(1)} {getParameterUnit(param1)}</span>
+                            <span className="text-sm text-red-700 dark:text-red-400">{getParameterLabel(param1)}:</span>
+                            <span className="font-medium text-red-900 dark:text-red-300">{param1Min.toFixed(1)} - {param1Max.toFixed(1)} {getParameterUnit(param1)}</span>
                           </div>
                           <div className="flex justify-between">
-                            <span className="text-sm text-red-700">{getParameterLabel(param2)}:</span>
-                            <span className="font-medium text-red-900">{param2Min.toFixed(1)} - {param2Max.toFixed(1)} {getParameterUnit(param2)}</span>
+                            <span className="text-sm text-red-700 dark:text-red-400">{getParameterLabel(param2)}:</span>
+                            <span className="font-medium text-red-900 dark:text-red-300">{param2Min.toFixed(1)} - {param2Max.toFixed(1)} {getParameterUnit(param2)}</span>
                           </div>
                         </div>
                       </div>
                       
-                      <div className="bg-indigo-50 p-4 rounded-lg">
-                        <h3 className="font-medium text-indigo-900 mb-2">Trend Analysis</h3>
-                        <div className="text-sm text-indigo-700">
+                      <div className="bg-indigo-50 dark:bg-indigo-900/30 p-4 rounded-xl border border-indigo-200 dark:border-indigo-700 shadow-sm">
+                        <h3 className="font-medium text-indigo-900 dark:text-indigo-300 mb-2">Trend Analysis</h3>
+                        <div className="text-sm text-indigo-700 dark:text-indigo-400">
                           {param1Data.length > 10 && (
                             <div className="mb-2">
                               <div className="flex justify-between">

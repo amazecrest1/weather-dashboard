@@ -15,6 +15,20 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+
+  /* Tooltip variables for light theme */
+  :root {
+    --tooltip-bg: rgba(255, 255, 255, 0.95);
+    --tooltip-border: 1px solid #e5e7eb;
+    --tooltip-text: #374151;
+  }
+
+  /* Tooltip variables for dark theme */
+  .dark {
+    --tooltip-bg: rgba(31, 41, 55, 0.95);
+    --tooltip-border: 1px solid #4b5563;
+    --tooltip-text: #f3f4f6;
+  }
 }
 
 @layer components {
