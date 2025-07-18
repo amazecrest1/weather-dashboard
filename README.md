@@ -63,7 +63,7 @@ npm install
 npm start
 ```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser
+4. Open [https://amazecrest1.github.io/weather-dashboard/#/](https://amazecrest1.github.io/weather-dashboard/#/) in your browser
 
 ### Available Scripts
 
