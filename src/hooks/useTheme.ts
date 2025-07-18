@@ -63,7 +63,7 @@ export const useTheme = () => {
 
   // Listen for system theme changes
   useEffect(() => {
-    // Check if we're in a test environment or if matchMedia is not available
+    
     if (!window.matchMedia) {
       return;
     }

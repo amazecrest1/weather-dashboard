@@ -29,7 +29,9 @@ describe('CitySelector', () => {
     fireEvent.click(screen.getByRole('button'));
     expect(screen.getByText('All Cities Selected')).toBeInTheDocument();
     expect(screen.getByText('New York')).toBeInTheDocument();
-    expect(screen.getByText('United States')).toBeInTheDocument();
+    // Use getAllByText and check the first occurrence to avoid multiple elements error
+    const unitedStatesElements = screen.getAllByText('United States');
+    expect(unitedStatesElements.length).toBeGreaterThan(0);
   });
 
   it('calls onCityChange when a city is selected', () => {

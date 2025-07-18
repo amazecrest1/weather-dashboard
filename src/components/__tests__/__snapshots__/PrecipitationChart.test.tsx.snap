@@ -5,13 +5,13 @@ exports[`PrecipitationChart matches snapshot with data 1`] = `
   class=""
 >
   <div
-    class="flex items-center mb-4"
+    class="flex items-center mb-3 sm:mb-4"
   >
     <div
       class="flex items-center"
     >
       <svg
-        class="w-5 h-5 text-gray-600 mr-2"
+        class="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 mr-2"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
@@ -24,14 +24,14 @@ exports[`PrecipitationChart matches snapshot with data 1`] = `
         />
       </svg>
       <h3
-        class="text-lg font-medium text-gray-900"
+        class="text-base sm:text-lg font-medium text-gray-900 dark:text-blue-200 bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent"
       >
         Precipitation
       </h3>
     </div>
   </div>
   <div
-    style="width: 100%; height: 350px;"
+    style="width: 100%; height: 250px; min-height: 200px;"
   >
     <div
       class="recharts-responsive-container"
@@ -46,13 +46,13 @@ exports[`PrecipitationChart matches snapshot with empty data 1`] = `
   class=""
 >
   <div
-    class="flex items-center mb-4"
+    class="flex items-center mb-3 sm:mb-4"
   >
     <div
       class="flex items-center"
     >
       <svg
-        class="w-5 h-5 text-gray-600 mr-2"
+        class="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 mr-2"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
@@ -65,14 +65,14 @@ exports[`PrecipitationChart matches snapshot with empty data 1`] = `
         />
       </svg>
       <h3
-        class="text-lg font-medium text-gray-900"
+        class="text-base sm:text-lg font-medium text-gray-900 dark:text-blue-200 bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent"
       >
         Precipitation
       </h3>
     </div>
   </div>
   <div
-    style="width: 100%; height: 350px;"
+    style="width: 100%; height: 250px; min-height: 200px;"
   >
     <div
       class="recharts-responsive-container"

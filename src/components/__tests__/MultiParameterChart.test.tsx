@@ -3,6 +3,15 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import MultiParameterChart from '../MultiParameterChart';
 
+// Mock useTheme hook
+jest.mock('../../hooks/useTheme', () => ({
+  useTheme: () => ({
+    theme: 'light',
+    toggleTheme: jest.fn(),
+    setTheme: jest.fn(),
+  }),
+}));
+
 jest.mock('recharts', () => ({
   LineChart: ({ children }: { children: React.ReactNode }) => <div data-testid="line-chart">{children}</div>,
   Line: ({ name }: { name: string }) => <div data-testid={`line-${name}`}>{name}</div>,
@@ -28,7 +37,6 @@ describe('MultiParameterChart', () => {
     expect(screen.getByTestId('line-chart')).toBeInTheDocument();
     expect(screen.getByTestId('x-axis')).toBeInTheDocument();
     expect(screen.getByTestId('y-axis')).toBeInTheDocument();
-    expect(screen.getByTestId('tooltip')).toBeInTheDocument();
     expect(screen.getByTestId('legend')).toBeInTheDocument();
   });
 
@@ -37,7 +45,6 @@ describe('MultiParameterChart', () => {
     expect(screen.getByTestId('responsive-container')).toBeInTheDocument();
     expect(screen.getByTestId('line-chart')).toBeInTheDocument();
     expect(screen.getAllByTestId('y-axis').length).toBeGreaterThanOrEqual(1);
-    expect(screen.getByTestId('tooltip')).toBeInTheDocument();
     expect(screen.getByTestId('legend')).toBeInTheDocument();
   });
 

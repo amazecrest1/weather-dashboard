@@ -130,7 +130,7 @@ describe('API Utility Functions', () => {
         end.toISOString().split('T')[0], 
         30
       );
-      expect(result).toBe(true);
+      expect(result.isValid).toBe(true);
     });
 
     it('should reject future dates', () => {
@@ -142,7 +142,7 @@ describe('API Utility Functions', () => {
         futureDate.toISOString().split('T')[0], 
         30
       );
-      expect(result).toBe(false);
+      expect(result.isValid).toBe(false);
     });
 
     it('should reject dates older than 90 days', () => {
@@ -155,7 +155,7 @@ describe('API Utility Functions', () => {
         oldEnd.toISOString().split('T')[0], 
         30
       );
-      expect(result).toBe(false);
+      expect(result.isValid).toBe(false);
     });
 
     it('should reject range exceeding max days', () => {
@@ -167,7 +167,7 @@ describe('API Utility Functions', () => {
         end.toISOString().split('T')[0], 
         30
       );
-      expect(result).toBe(false);
+      expect(result.isValid).toBe(false);
     });
 
     it('should reject start date after end date', () => {
@@ -179,7 +179,7 @@ describe('API Utility Functions', () => {
         end.toISOString().split('T')[0], 
         30
       );
-      expect(result).toBe(false);
+      expect(result.isValid).toBe(false);
     });
   });
 

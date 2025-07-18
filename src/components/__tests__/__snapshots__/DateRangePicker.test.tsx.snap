@@ -5,20 +5,37 @@ exports[`DateRangePicker matches snapshot with default date range 1`] = `
   class="relative flex flex-col "
 >
   <button
-    class="w-full px-6 py-3 border border-gray-200 rounded-xl bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-left flex items-center justify-between shadow-lg hover:border-gray-300 transition-colors font-medium"
+    class="w-full px-3 sm:px-4 md:px-6 py-3 border border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-purple-400 focus:border-purple-500 dark:focus:border-purple-400 text-left flex items-center justify-between shadow-lg dark:shadow-gray-900/50 hover:border-gray-300 dark:hover:border-gray-500 transition-all duration-200 font-medium text-xs sm:text-sm md:text-base backdrop-blur-sm disabled:opacity-50 disabled:cursor-not-allowed group"
     style="min-height: 56px;"
     type="button"
   >
-    <span
-      class="truncate"
-    >
-      Jan 1, 2024 - Jan 7, 2024
-    </span>
-    <span
-      class="flex items-center justify-center ml-3"
+    <div
+      class="flex items-center space-x-2 min-w-0 flex-1"
     >
       <svg
-        class="w-6 h-6 text-gray-400"
+        class="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 dark:text-gray-500 group-hover:text-purple-500 dark:group-hover:text-purple-400 transition-colors flex-shrink-0"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+      <span
+        class="truncate text-left"
+      >
+        Jan 1 - 7, 2024
+      </span>
+    </div>
+    <div
+      class="flex items-center space-x-2"
+    >
+      <svg
+        class="w-5 h-5 text-gray-400 dark:text-gray-500 transition-transform duration-200 "
         fill="none"
         stroke="currentColor"
         stroke-width="2"
@@ -30,7 +47,7 @@ exports[`DateRangePicker matches snapshot with default date range 1`] = `
           stroke-linejoin="round"
         />
       </svg>
-    </span>
+    </div>
   </button>
 </div>
 `;
@@ -40,20 +57,37 @@ exports[`DateRangePicker matches snapshot with different date range 1`] = `
   class="relative flex flex-col "
 >
   <button
-    class="w-full px-6 py-3 border border-gray-200 rounded-xl bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-left flex items-center justify-between shadow-lg hover:border-gray-300 transition-colors font-medium"
+    class="w-full px-3 sm:px-4 md:px-6 py-3 border border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-purple-400 focus:border-purple-500 dark:focus:border-purple-400 text-left flex items-center justify-between shadow-lg dark:shadow-gray-900/50 hover:border-gray-300 dark:hover:border-gray-500 transition-all duration-200 font-medium text-xs sm:text-sm md:text-base backdrop-blur-sm disabled:opacity-50 disabled:cursor-not-allowed group"
     style="min-height: 56px;"
     type="button"
   >
-    <span
-      class="truncate"
-    >
-      Feb 1, 2024 - Feb 15, 2024
-    </span>
-    <span
-      class="flex items-center justify-center ml-3"
+    <div
+      class="flex items-center space-x-2 min-w-0 flex-1"
     >
       <svg
-        class="w-6 h-6 text-gray-400"
+        class="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 dark:text-gray-500 group-hover:text-purple-500 dark:group-hover:text-purple-400 transition-colors flex-shrink-0"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+      <span
+        class="truncate text-left"
+      >
+        Feb 1 - 15, 2024
+      </span>
+    </div>
+    <div
+      class="flex items-center space-x-2"
+    >
+      <svg
+        class="w-5 h-5 text-gray-400 dark:text-gray-500 transition-transform duration-200 "
         fill="none"
         stroke="currentColor"
         stroke-width="2"
@@ -65,7 +99,7 @@ exports[`DateRangePicker matches snapshot with different date range 1`] = `
           stroke-linejoin="round"
         />
       </svg>
-    </span>
+    </div>
   </button>
 </div>
 `;
